@@ -15,10 +15,10 @@
           <el-col ><el-button class=submit type="primary" @onclick="submit('LoginForm')" > 登录</el-button></el-col>
         </el-row>
         <el-row  class=bottomLink>
-          <el-col  offset="4" span="8" >
+          <el-col :span="8" :offset="5" >
             <a href="bai" >忘记密码</a></el-col>
-          <el-col :span="2" >|</el-col>
-          <el-col :span="8">
+          <el-col  :span="2" :offset="1" >|</el-col>
+          <el-col  :span="4">
               <a href="bai" >注册</a></el-col>
         </el-row>
       </el-form-item>
