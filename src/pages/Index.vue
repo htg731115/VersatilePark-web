@@ -3,16 +3,16 @@
 <div  class = "note" :style = "note" >
 <!--login框，表单+tab标签页的组合-->
   <div class="animated  zoomInDown">
-    <el-form ref = "AccountForm"  class = "demo-ruleForm login-container" label-width="60px">
-      <el-form-item label="用户名:">
-        <el-input v-model="a" placeholder="请输入用户名"></el-input>
+    <el-form :model="LoginForm" :rules="rules" ref = "AccountForm"  class = "demo-ruleForm login-container" label-width="70px">
+      <el-form-item label="用户名:" prop="name">
+        <el-input v-model="LoginForm.name" placeholder="请输入用户名"></el-input>
       </el-form-item>
-      <el-form-item label="密码:">
-        <el-input type="password" v-model="b" placeholder="请输入密码"></el-input>
+      <el-form-item label="密码:" prop="password" >
+        <el-input type="password" v-model="LoginForm.password"  placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-form-item >
         <el-row >
-          <el-col ><el-button class=submit type="primary"  > 登录</el-button></el-col>
+          <el-col ><el-button class=submit type="primary" @onclick="submit('LoginForm')" > 登录</el-button></el-col>
         </el-row>
         <el-row  class=bottomLink>
           <el-col  offset="4" span="8" >
@@ -33,7 +33,21 @@
 
 <script>
 export default {
+  data(){
+    return {
+      LoginForm:{
+        name:'',
+        password:'',
+      },
+      rules:{
+        name:[{ required:true ,message:'请输入账号',trigger:'blur'}],
+        password:[{ required:true ,message:"请输入密码",trigger:'blur'}]
+      }
+    }
+  },
+
 }
+
 
 </script>
 
