@@ -1,6 +1,6 @@
 <template>
 <!--背景图-->
-<div  class = "note" :style = "note" >
+<div id="app">
 <!--login框，表单+tab标签页的组合-->
   <div class="animated  zoomInDown">
     <el-form :model="LoginForm" :rules="rules" ref = "AccountForm"  class = "demo-ruleForm login-container" label-width="70px">
@@ -12,32 +12,35 @@
       </el-form-item>
       <el-form-item >
         <el-row >
-          <el-col ><el-button class=submit type="primary" @onclick="submit('LoginForm')" > 登录</el-button></el-col>
+          <el-col ><el-button class=submit type="primary" v-on:click="submit" > 登录</el-button></el-col>
         </el-row>
         <el-row  class=bottomLink>
           <el-col :span="8" :offset="5" >
-            <a href="bai" >忘记密码</a></el-col>
+            <a @click="submit()" >忘记密码</a></el-col>
           <el-col  :span="2" :offset="1" >|</el-col>
           <el-col  :span="4">
               <a href="bai" >注册</a></el-col>
         </el-row>
       </el-form-item>
+      <el-form-item>
+        <div v-if="seen">1</div>
+      </el-form-item>
     </el-form>
   </div>
-  <div id="app">
-  {{ message }}
-</div>
 </div>
 
 </template>
 
 <script>
 export default {
+  el:'#app',
   data(){
     return {
+      seen:false,
       LoginForm:{
         name:'',
         password:'',
+
       },
       rules:{
         name:[{ required:true ,message:'请输入账号',trigger:'blur'}],
@@ -45,8 +48,22 @@ export default {
       }
     }
   },
+  methods:{
+    submit:function()
+    {
 
+  this.$ajax.get('www.api.coindesk.com/v1/bpi/currentprice.json').then(response => {
+    this.seen=false
+    // success callback
+}, response => {
+    this.LoginForm.seen=false
+    // error callback
+    this.seen=true
+})
+    }
+  }
 }
+
 
 
 </script>
