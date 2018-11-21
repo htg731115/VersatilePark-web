@@ -16,16 +16,14 @@
         </el-row>
         <el-row  class=bottomLink>
           <el-col :span="8" :offset="5" >
-            <a @click="submit()" >忘记密码</a></el-col>
+            <a>忘记密码</a></el-col>
           <el-col  :span="2" :offset="1" >|</el-col>
           <el-col  :span="4">
               <a href="bai" >注册</a></el-col>
         </el-row>
       </el-form-item>
-      <el-form-item>
-        <div v-if="seen">1</div>
-      </el-form-item>
     </el-form>
+
   </div>
 </div>
 
@@ -52,11 +50,16 @@ export default {
     submit:function()
     {
 
-  this.$ajax.get('www.api.coindesk.com/v1/bpi/currentprice.json').then(response => {
-    this.seen=false
+    this.$ajax.get('api/all').then(response => {
     // success callback
+    this.$notify({
+      tittle:'警告',
+      message:response.data,
+      type:'warning'
+    });
+    console.log(response.data)
 }, response => {
-    this.LoginForm.seen=false
+
     // error callback
     this.seen=true
 })
