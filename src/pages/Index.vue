@@ -12,11 +12,11 @@
       </el-form-item>
       <el-form-item >
         <el-row >
-          <el-col ><el-button class=submit type="primary" v-on:click="submit" > 登录</el-button></el-col>
+          <el-col ><el-button class=submit type="primary" v-on:click="submit" :loading="loading"> 登录</el-button></el-col>
         </el-row>
         <el-row  class=bottomLink>
           <el-col :span="8" :offset="5" >
-            <a>忘记密码</a></el-col>
+            <a href="Forget">忘记密码</a></el-col>
           <el-col  :span="2" :offset="1" >|</el-col>
           <el-col  :span="4">
               <a href="bai" >注册</a></el-col>
@@ -35,6 +35,7 @@ export default {
   data(){
     return {
       seen:false,
+      loading:false,
       LoginForm:{
         name:'',
         password:'',
@@ -42,27 +43,48 @@ export default {
       },
       rules:{
         name:[{ required:true ,message:'请输入账号',trigger:'blur'}],
-        password:[{ required:true ,message:"请输入密码",trigger:'blur'}]
+        password:[{ required:true ,message:"请输入密码",trigger:'blur'},{min:2,max:10,message:"密码长度有误"}]
       }
     }
   },
   methods:{
     submit:function()
     {
-
-    this.$ajax.get('api/all').then(response => {
+    this.loading=true
+    this.$ajax.post('api/login',{
+      name:this.LoginForm.name,
+      password:this.$md5(this.LoginForm.password)
+    }
+  ).then(response => {
     // success callback
-    this.$notify({
+    setTimeout(() => {
+                this.loading = false;
+            }, 500)
+    if(response.data==true)
+    {
+      this.$notify({
       tittle:'警告',
-      message:response.data,
+      message:"登录成功了",
       type:'warning'
-    });
+    });}
+    else{
+      this.$notify({
+      tittle:'警告',
+      message:"登录失败",
+      type:'warning'
+    })}
     console.log(response.data)
-}, response => {
+    }, response => {
 
     // error callback
-    this.seen=true
-})
+    this.$notify({
+      tittle:'警告',
+      message:"有问题",
+      type:'warning'
+    });
+  })
+
+
     }
   }
 }
