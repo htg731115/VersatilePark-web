@@ -1,9 +1,11 @@
 <template>
-<!--背景图-->
+
 <div id="app">
-<!--login框，表单+tab标签页的组合-->
-  <div class="animated  zoomInDown">
-    <el-form :model="LoginForm" :rules="rules" ref = "AccountForm"  class = "demo-ruleForm login-container" label-width="70px">
+  <h1  class="animated tada delay-3s">
+    VersatilePark
+  </h1>
+  <div class="animated  zoomInDown ">
+    <el-form :model="LoginForm" :rules="rules" ref = "LoginForm"  class = "login-container" label-width="70px">
       <el-form-item label="用户名:" prop="name">
         <el-input v-model="LoginForm.name" placeholder="请输入用户名"></el-input>
       </el-form-item>
@@ -12,18 +14,17 @@
       </el-form-item>
       <el-form-item >
         <el-row >
-          <el-col ><el-button class=submit type="primary" v-on:click="submit" :loading="loading"> 登录</el-button></el-col>
+          <el-col ><el-button class=submit type="primary" v-on:click="submit(LoginForm)" :loading="loading"> 登录</el-button></el-col>
         </el-row>
-        <el-row  class=bottomLink>
+        <el-row  class="bottomLink">
           <el-col :span="8" :offset="5" >
             <a href="Forget">忘记密码</a></el-col>
           <el-col  :span="2" :offset="1" >|</el-col>
-          <el-col  :span="4">
-              <a href="bai" >注册</a></el-col>
+          <el-col  :span="4" :offset="1" >
+              <a href="bai">注册</a></el-col>
         </el-row>
       </el-form-item>
     </el-form>
-
   </div>
 </div>
 
@@ -36,6 +37,8 @@ export default {
     return {
       seen:false,
       loading:false,
+      Remessage:"",
+      remember:true,
       LoginForm:{
         name:'',
         password:'',
@@ -48,43 +51,42 @@ export default {
     }
   },
   methods:{
-    submit:function()
+    submit:function(LoginForm)
     {
-    this.loading=true
-    this.$ajax.post('api/login',{
-      name:this.LoginForm.name,
-      password:this.$md5(this.LoginForm.password)
-    }
-  ).then(response => {
-    // success callback
-    setTimeout(() => {
-                this.loading = false;
-            }, 500)
-    if(response.data==true)
-    {
-      this.$notify({
-      tittle:'警告',
-      message:"登录成功了",
-      type:'warning'
-    });}
-    else{
-      this.$notify({
-      tittle:'警告',
-      message:"登录失败",
-      type:'warning'
-    })}
-    console.log(response.data)
-    }, response => {
+      this.$refs.LoginForm.validate((valid) => {
+        if (valid) {
+          this.loading=true
+          this.$ajax.post('api/addUser',{
+            name:this.LoginForm.name,
+            password:this.$md5(this.LoginForm.password)
+          }).then(response => {
+        // success callback
+          setTimeout(() => {
+                    this.loading = false}, 500)
+          if(response.data==true)
+            this.Remessage="登录成功了"
+          else
+            this.Remessage="登录失败,密码错误"
+          this.$notify({
+          tittle:'警告',
+          message:this. Remessage,
+          type:'warning'
+          });
+          console.log(this.Remessage);
+          }, response => {
+        // error callback
+          this.$notify({
+          tittle:'警告',
+          message:"有问题",
+          type:'warning'
+          });
+          })
 
-    // error callback
-    this.$notify({
-      tittle:'警告',
-      message:"有问题",
-      type:'warning'
-    });
-  })
-
-
+        }
+        else {
+          console.log("bad")
+        }
+      })
     }
   }
 }
@@ -109,7 +111,7 @@ export default {
     border-radius: 5px;
     -moz-border-radius: 5px;
     background-clip: padding-box;
-    margin: 180px auto;
+    margin: 50px auto;
     width: 330px;
     padding: 35px 35px 15px 35px;
     background: #fff;
@@ -126,5 +128,7 @@ a{
 a:hover{
     text-decoration:underline;
 }
-
+h1{
+  color: #303133;
+}
 </style>
