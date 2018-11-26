@@ -46,13 +46,18 @@ export default {
       },
       rules:{
         name:[{ required:true ,message:'请输入账号',trigger:'blur'}],
-        password:[{ required:true ,message:"请输入密码",trigger:'blur'},{min:2,max:10,message:"密码长度有误"}]
+        password:[{ required:true ,message:"请输入密码",trigger:'blur'},{min:6,max:16,message:"密码长度有误"}]
       }
     }
+  },
+  mounted(){
+    this.call2();
   },
   methods:{
     submit:function(LoginForm)
     {
+      this.$store.commit("setUsername","obj")
+      console.log(this.$store.state.Username)
       this.$refs.LoginForm.validate((valid) => {
         if (valid) {
           this.loading=true
@@ -63,9 +68,10 @@ export default {
         // success callback
           setTimeout(() => {
                     this.loading = false}, 500)
-          if(response.data==true)
+          if(response.data==true){
             this.Remessage="登录成功了"
-          else
+            this.$store.commit('increment')
+          }else
             this.Remessage="登录失败,密码错误"
           this.$notify({
           tittle:'警告',
@@ -87,7 +93,13 @@ export default {
           console.log("bad")
         }
       })
+    },//登录
+    call2:function()
+    {
+      console.log(this.$store.state.Username)
+
     }
+
   }
 }
 

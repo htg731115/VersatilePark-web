@@ -7,6 +7,7 @@ import ElementUI from 'element-ui'
 import animate from 'animate.css'
 import axios from 'axios'
 import md5 from 'js-md5';
+import store from './store/store.js'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
@@ -21,5 +22,6 @@ new Vue({
   router,
   components: { App },
   axios,
+  store,
   template: '<App/>'
 })
