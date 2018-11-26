@@ -16,6 +16,19 @@ Vue.prototype.$ajax = axios
 Vue.prototype.$md5=md5
 axios.defaults.baseURL = 'http://localhost:8090/'; //配置接口地址
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)){
+    if(store.state.isLogin)
+      next()
+    else{
+      console.log("1");
+      next()
+    }
+  }
+  else{
+    next()
+  }
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

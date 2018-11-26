@@ -4,15 +4,19 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state:{
-    isLogin:0,
-    Username:sessionStorage.getItem('Username')
+    isLogin:window.sessionStorage.getItem('isLogin'),
+    Username:window.sessionStorage.getItem('Username')
   },
   mutations:{
-    increment:state => state.isLogin ++,
-    decrement:state => state.isLogin --,
-    setUsername:(state,date)=>{
+    In_Login:state => {
+      state.isLogin=true;
+      window.sessionStorage.setItem('isLogin',true);},
+    Out_Login:state => {
+      state.isLogin=false;
+      window.sessionStorage.setItem('isLogin',false);},
+    Set_Username:(state,date)=>{
       state.Username=date;
-      sessionStorage.setItem('Username',date);
+      window.sessionStorage.setItem('Username',date);
     }
   }
 })

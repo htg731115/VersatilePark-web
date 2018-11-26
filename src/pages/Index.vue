@@ -26,11 +26,13 @@
       </el-form-item>
     </el-form>
   </div>
+  <router-link to="/Main"> AAAAAAAAAAAAA</router-link>
 </div>
 
 </template>
 
 <script>
+
 export default {
   el:'#app',
   data(){
@@ -56,21 +58,21 @@ export default {
   methods:{
     submit:function(LoginForm)
     {
-      this.$store.commit("setUsername","obj")
-      console.log(this.$store.state.Username)
-      this.$refs.LoginForm.validate((valid) => {
+      this.$store.commit('In_Login')
+      this.$refs.LoginForm.validate((valid) => {//表单是否符合规则
         if (valid) {
           this.loading=true
-          this.$ajax.post('api/addUser',{
+          this.$ajax.post('api/login',{
             name:this.LoginForm.name,
             password:this.$md5(this.LoginForm.password)
           }).then(response => {
         // success callback
           setTimeout(() => {
-                    this.loading = false}, 500)
+                    this.loading = false}, 500)//设置按钮延迟
           if(response.data==true){
             this.Remessage="登录成功了"
-            this.$store.commit('increment')
+            this.$store.commit('In_Login')
+            this.$router.push({path: '/Main'});
           }else
             this.Remessage="登录失败,密码错误"
           this.$notify({
