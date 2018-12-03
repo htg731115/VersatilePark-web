@@ -12,7 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
-Vue.prototype.$ajax = axios
+Vue.prototype.$axios = axios
 Vue.prototype.$md5=md5
 axios.defaults.baseURL = 'http://localhost:8090/'; //配置接口地址
 

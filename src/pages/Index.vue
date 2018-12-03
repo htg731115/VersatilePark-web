@@ -18,15 +18,15 @@
         </el-row>
         <el-row  class="bottomLink">
           <el-col :span="8" :offset="5" >
-            <a href="Forget">忘记密码</a></el-col>
+            <router-link to="/Forget">忘记密码</router-link></el-col>
           <el-col  :span="2" :offset="1" >|</el-col>
           <el-col  :span="4" :offset="1" >
-              <a href="bai">注册</a></el-col>
+                <router-link to="/Register"> 注册</router-link></el-col>
         </el-row>
       </el-form-item>
     </el-form>
   </div>
-  <router-link to="/Main"> AAAAAAAAAAAAA</router-link>
+
 </div>
 
 </template>
@@ -34,7 +34,7 @@
 <script>
 
 export default {
-  el:'#app',
+
   data(){
     return {
       seen:false,
@@ -62,7 +62,7 @@ export default {
       this.$refs.LoginForm.validate((valid) => {//表单是否符合规则
         if (valid) {
           this.loading=true
-          this.$ajax.post('api/login',{
+          this.$axios.post('api/login',{
             name:this.LoginForm.name,
             password:this.$md5(this.LoginForm.password)
           }).then(response => {
@@ -77,7 +77,7 @@ export default {
             this.Remessage="登录失败,密码错误"
           this.$notify({
           tittle:'警告',
-          message:this. Remessage,
+          message:this.Remessage,
           type:'warning'
           });
           console.log(this.Remessage);
