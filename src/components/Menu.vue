@@ -1,12 +1,11 @@
 <template>
-  <div style=" border: 1px solid #eee">
-
-    <el-row class="tac">
-      <el-col :span="24">
+  <div>
         <h5>默认颜色</h5>
         <el-menu
           default-active="2"
           class="el-menu-vertical-demo"
+          background-color="#545c64"
+          text-color="#fff"
           @open="handleOpen"
           @close="handleClose">
           <el-submenu index="1">
@@ -40,23 +39,20 @@
             <span slot="title">导航四</span>
           </el-menu-item>
         </el-menu>
-      </el-col>
-
-    </el-row>
 </div>
 </template>
 
 <style scoped>
-  .menu{
-    width:200px;
-  }
   .el-header {
     background-color: #B3C0D1;
     color: #333;
     line-height: 60px;
   }
-
+  .el-menu{
+    width:250px;
+    border-right-width: 0;
+  }
   .el-aside {
-    color: #333;
+    color:  #606266;
   }
 </style>

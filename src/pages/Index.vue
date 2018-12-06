@@ -14,7 +14,7 @@
       </el-form-item>
       <el-form-item >
         <el-row >
-          <el-col ><el-button class=submit type="primary" v-on:click="submit(LoginForm)" :loading="loading"> 登录</el-button></el-col>
+          <el-col ><el-button class="submit" type="primary" v-on:click="submit(LoginForm)" :loading="loading"> 登录</el-button></el-col>
         </el-row>
         <el-row  class="bottomLink">
           <el-col :span="8" :offset="5" >

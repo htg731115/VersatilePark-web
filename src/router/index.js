@@ -4,6 +4,7 @@ import Index from '@/pages/Index'
 import Main from '@/pages/Main'
 import Register from '@/pages/Register'
 import Menu from '@/components/Menu'
+
 import Project from '@/pages/Project'
 Vue.use(Router)
 

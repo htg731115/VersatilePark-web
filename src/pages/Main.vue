@@ -1,35 +1,39 @@
 <template>
 
 <div id="Main">
-<el-row>
-  <el-col :span="3">
-    <Menu></Menu>
-  </el-col>
-<el-col :span="18" :offset="1">
-    <router-view></router-view>
-</el-col>
-
-</el-row>
+  <el-container style="height: 100%">
+    <el-aside width="250px">
+      <Menu></Menu>
+    </el-aside>
+    <el-container>
+    <el-header>
+      <Header></Header>
+    </el-header>
+      <el-main>
+      <router-view></router-view>
+    </el-main>
+  </el-container>
+    </el-container>
 </div>
+
 </template>
 
 <script>
-import Menu from '../components/Menu.vue'
+import Menu from '../components/Menu.vue';
+import Header from '../components/Header.vue'
 export default {
   name:'Main',
-  components:{Menu},
+  components:{Menu,Header},
   data(){
     return{
     }
   }
 }
-
-
-
 </script>
 
-<style >
-.menu{
-  width:200px;
+<style>
+.el-aside{
+  height:1000PX;
+  background-color: #545c64;
 }
 </style>
