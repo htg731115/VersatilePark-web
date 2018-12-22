@@ -21,6 +21,7 @@
           <el-col :span="8">
               <a href="bai" >注册</a></el-col>
         </el-row>
+
       </el-form-item>
     </el-form>
   </div>

@@ -4,7 +4,7 @@ import Index from '@/pages/Index'
 import Main from '@/pages/Main'
 import Register from '@/pages/Register'
 import Menu from '@/components/Menu'
-
+import Manager from '@/pages/Manager'
 import Project from '@/pages/Project'
 Vue.use(Router)
 
@@ -30,7 +30,10 @@ export default new Router({
       path:'/Main',
       name:'Main',
       component: Main,
-      children:[{path:'/home',name:'Login',component:Index},{path:'/project',name:'project',component:Project}],
+      children:[
+        {path:'/home',name:'Login',component:Index},
+        {path:'/project',name:'Project',component:Project},
+        {path:'/manager',name:'Manager',component:Manager}],
       meta:{
          requiresAuth: true
       }
