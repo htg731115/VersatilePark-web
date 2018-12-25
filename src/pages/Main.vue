@@ -9,7 +9,7 @@
       </el-col>
       <el-col :span="19" class="view">
         <el-row>
-          <router-view></router-view>
+            <router-view></router-view>
         </el-row>
     </el-col>
   </el-row>

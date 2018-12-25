@@ -17,6 +17,11 @@
               <el-menu-item index="/manager">管理员</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-news"></i>
+              <span>运营管理</span>
+            </template>
+              <el-menu-item index="/users">用户管理</el-menu-item>
           </el-submenu>
         </el-menu>
 </div>
@@ -33,7 +38,10 @@ export default{
   },
   methods:{
     GetActive(){
-      this.active=this.$route.path
+      if(this.$route.path=='/manager/detail')
+        this.active='/manager'
+      else
+        this.active=this.$route.path
       console.log("2"+this.active);
     }
   }

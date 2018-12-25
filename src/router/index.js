@@ -6,6 +6,8 @@ import Register from '@/pages/Register'
 import Menu from '@/components/Menu'
 import Manager from '@/pages/Manager'
 import Project from '@/pages/Project'
+import Detail from '@/pages/M_deltal'
+import User from '@/pages/User'
 Vue.use(Router)
 
 export default new Router({
@@ -31,9 +33,10 @@ export default new Router({
       name:'Main',
       component: Main,
       children:[
-        {path:'/home',name:'Login',component:Index},
         {path:'/project',name:'Project',component:Project},
-        {path:'/manager',name:'Manager',component:Manager}],
+        {path:'/manager',name:'Manager',component:Manager},
+        {path:'/manager/detail/:id',name:'Detail',component:Detail},
+        {path:'/users',name:'Uer',component:User}],
       meta:{
          requiresAuth: true
       }

@@ -8,7 +8,7 @@
             <el-row>{{item.project}}</el-row>
             <el-row>
               <el-col :span="8"><el-button type="text">编辑</el-button></el-col>
-              <el-col :span="8"><el-button type="text">查看</el-button></el-col>
+              <el-col :span="8"><el-button type="text" @click="GoCheck(item.id)">查看</el-button></el-col>
               <el-col :span="8">
                 <el-popover placement="top" v-model="showPop[index]">
                   <p>你确定要删除吗？</p>
@@ -22,7 +22,6 @@
     </el-row>
     <el-row>
       <el-col :span="10":offset=6>
-      <div class="block">
          <el-pagination
            @current-change="handleCurrentChange"
            :current-page.sync="pageNum"
@@ -30,7 +29,6 @@
            layout="prev, pager, next, jumper"
            :total="totalPages">
          </el-pagination>
-       </div>
      </el-col>
    </el-row>
   </div>
@@ -75,6 +73,9 @@ export default{
         setTimeout(() => {
                       this.$router.go(0)}, 1200);
       })
+    },
+    GoCheck(id){
+      this.$router.push({ name: 'Detail', params: { id: id }})
     },
     handleCurrentChange(){
       this.GetManager()
