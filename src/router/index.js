@@ -7,7 +7,7 @@ import Menu from '@/components/Menu'
 import Manager from '@/pages/Manager'
 import Project from '@/pages/Project'
 import Detail from '@/pages/M_deltal'
-import User from '@/pages/User'
+import Customer from '@/pages/Customer'
 Vue.use(Router)
 
 export default new Router({
@@ -36,7 +36,7 @@ export default new Router({
         {path:'/project',name:'Project',component:Project},
         {path:'/manager',name:'Manager',component:Manager},
         {path:'/manager/detail/:id',name:'Detail',component:Detail},
-        {path:'/users',name:'Uer',component:User}],
+        {path:'/customer',name:'Customer',component:Customer}],
       meta:{
          requiresAuth: true
       }

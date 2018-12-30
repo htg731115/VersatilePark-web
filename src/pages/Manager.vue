@@ -21,7 +21,7 @@
       </el-col>
     </el-row>
     <el-row>
-      <el-col :span="10":offset=6>
+      <el-col :span="10" :offset=6>
          <el-pagination
            @current-change="handleCurrentChange"
            :current-page.sync="pageNum"

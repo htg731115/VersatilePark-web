@@ -21,7 +21,7 @@
               <i class="el-icon-news"></i>
               <span>运营管理</span>
             </template>
-              <el-menu-item index="/users">用户管理</el-menu-item>
+              <el-menu-item index="/customer">用户管理</el-menu-item>
           </el-submenu>
         </el-menu>
 </div>

@@ -36,7 +36,6 @@ export default {
 <style >
 body{
   margin: 0px;
-
 }
 .menu{
 height: 900px;
