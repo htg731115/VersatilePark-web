@@ -70,7 +70,7 @@ export default {
           if(response.data==true){
             this.Remessage="登录成功了"
             this.$store.commit('In_Login')
-            this.$router.push({path: '/Main'});
+            this.$router.push({path: '/project'});
           }else
             this.Remessage="登录失败,密码错误"
           this.$notify({

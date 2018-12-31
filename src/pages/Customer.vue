@@ -19,7 +19,7 @@
     <el-row>
       <el-col :span="24"><el-button type="primary" @click="handleButton()"><span v-if="showCert"> 筛选出所有用户</span><span v-else >筛选出实名认证用户</span> </el-button></el-col>
     </el-row>
-    <el-row >
+    <el-row>
       <el-col>
         <el-card>
           <el-table
@@ -94,7 +94,7 @@ export default{
       this.$axios.get('/api/getcustomer',{
         params:{
           pageNum:this.pageNum        
-          }
+          } 
       }).then(res=>{
         this.customerData=res.data.list;
         this.totalPages=res.data.pages*10;
@@ -137,21 +137,20 @@ export default{
 
 }
 .card_panel{
-  height: 108px;
+  height:108px;
   margin-top: 30px;
   margin-bottom: 30px;
   box-shadow: 0 0 30px #cac6c6;
   text-align: left;
   font-family: "PingFang SC";
   font-size: 1.5vw;
-  color: #ff4949;
+  color: #fff;
 }
 .c_wapper1{
     background: #82e7a5;
 }
 .c_wapper2{
-  background-image: linear-gradient(135deg, #FFFE9F 0%, #FCA180 100%)
-
+  background-image: linear-gradient(135deg, #FF0000 0%, #FCA180 100%)
 }
 .word{
   padding-left: 2vw;

@@ -6,14 +6,16 @@ import router from './router'
 import ElementUI from 'element-ui'
 import animate from 'animate.css'
 import axios from 'axios'
-import md5 from 'js-md5';
+import md5 from 'js-md5'
 import store from './store/store.js'
+import echarts from 'echarts'
 import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.prototype.$axios = axios
 Vue.prototype.$md5=md5
+Vue.prototype.$echarts = echarts
 axios.defaults.baseURL = 'http://localhost:8090/'; //配置接口地址
 
 router.beforeEach((to, from, next) => {

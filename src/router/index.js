@@ -8,6 +8,7 @@ import Manager from '@/pages/Manager'
 import Project from '@/pages/Project'
 import Detail from '@/pages/M_deltal'
 import Customer from '@/pages/Customer'
+import Evaluation from '@/pages/Evaluation'
 Vue.use(Router)
 
 export default new Router({
@@ -36,7 +37,8 @@ export default new Router({
         {path:'/project',name:'Project',component:Project},
         {path:'/manager',name:'Manager',component:Manager},
         {path:'/manager/detail/:id',name:'Detail',component:Detail},
-        {path:'/customer',name:'Customer',component:Customer}],
+        {path:'/customer',name:'Customer',component:Customer},
+        {path:'/evaluation',name:'Evaluation',component:Evaluation}],
       meta:{
          requiresAuth: true
       }

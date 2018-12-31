@@ -67,7 +67,7 @@
 
 
      <el-row>
-       <el-col :span="10":offset=6>
+       <el-col :span="10" :offset="6">
        <div class="block">
           <el-pagination
             @current-change="handleCurrentChange"
@@ -121,6 +121,7 @@ export default {
   data(){
     return{
       Projectdata:[],
+      EmptyProject:[],
       Managerdata:[],
       addproform:{
           name:'',

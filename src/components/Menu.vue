@@ -22,6 +22,7 @@
               <span>运营管理</span>
             </template>
               <el-menu-item index="/customer">用户管理</el-menu-item>
+              <el-menu-item index="/evaluation">用户评价</el-menu-item>
           </el-submenu>
         </el-menu>
 </div>
@@ -56,5 +57,7 @@ export default{
 }
 .el-menu-item{
   border-right-width: 0;
+  min-width: 100px;
 }
+
 </style>
