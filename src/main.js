@@ -13,6 +13,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.prototype.$echarts =echarts
 Vue.prototype.$axios = axios
 Vue.prototype.$md5=md5
 Vue.prototype.$echarts = echarts
@@ -38,5 +39,6 @@ new Vue({
   components: { App },
   axios,
   store,
+  echarts,
   template: '<App/>'
 })
