@@ -1,5 +1,5 @@
 停车场管理系统前端、目前仍在初期阶段
-目前使用技术栈:vue、vuex、elementUI、axios
+目前使用技术栈:vue、vuex、elementUI、axios.
 # vue
 
 > A Vue.js project
