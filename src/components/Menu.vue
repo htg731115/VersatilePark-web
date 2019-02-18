@@ -23,6 +23,7 @@
             </template>
               <el-menu-item index="/customer">用户管理</el-menu-item>
               <el-menu-item index="/evaluation">用户评价</el-menu-item>
+              <el-menu-item index="/paycombo">套餐管理</el-menu-item>
           </el-submenu>
         </el-menu>
 </div>

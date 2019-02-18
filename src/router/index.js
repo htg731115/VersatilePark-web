@@ -9,6 +9,7 @@ import Project from '@/pages/Project'
 import Detail from '@/pages/M_deltal'
 import Customer from '@/pages/Customer'
 import Evaluation from '@/pages/Evaluation'
+import PayCombo from '@/pages/PayCombo'
 Vue.use(Router)
 
 export default new Router({
@@ -38,7 +39,8 @@ export default new Router({
         {path:'/manager',name:'Manager',component:Manager},
         {path:'/manager/detail/:id',name:'Detail',component:Detail},
         {path:'/customer',name:'Customer',component:Customer},
-        {path:'/evaluation',name:'Evaluation',component:Evaluation}],
+        {path:'/evaluation',name:'Evaluation',component:Evaluation},
+        {path:'/paycombo',name:'PayCombo',component:PayCombo}],
       meta:{
          requiresAuth: true
       }
