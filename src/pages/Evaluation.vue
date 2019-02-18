@@ -6,7 +6,7 @@
         </el-row>
         <el-row>
             <el-card>
-                <el-row>
+                <el-row style="">
                 <el-select v-model="select" @change="searchById(select)" placeholder="请选择停车项目搜索">
                     <el-option
                     v-for="item in projectList"
@@ -144,7 +144,11 @@ export default{
             })
         },
         searchByName(customer_name,project_id){
-            this.$axios.get("/api/search-evalbyname",{
+            if(customer_name!=""){
+                this.searchById(select)
+            }
+            else{
+                this.$axios.get("/api/search-evalbyname",{
                 params:{
                     pageNum:1,
                     customer_name:customer_name,
@@ -153,6 +157,7 @@ export default{
             }).then(res=>{
                 this.evaluationDate=res.data.list;
             })
+            }
         }
     }
 }
