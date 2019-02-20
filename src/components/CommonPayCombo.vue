@@ -23,7 +23,13 @@
             <el-button v-if="edit" type="success" plain @click="editComPayCombo()">确认修改</el-button>
             <el-button v-else type="primary" plain @click="edit=!edit">修改通用套餐</el-button>
         </el-col>
-
+        <el-col :span="10">
+            <el-card>
+                <div v-for="item in logData" :key="item.index">
+                    <el-radio v-model="radio" :label=item.id >套餐名称：{{item.log_combo_name}}，时长：{{item.log_effective_length}},金额：{{item.log_money}} </el-radio>
+                </div>
+            </el-card>
+        </el-col>
     </el-row>
 </div>
 </template>
@@ -36,10 +42,17 @@ export default{
             comboName:'',
             money:'',
             effectLength:'',
+            temp_effectLength:'',
+            temp_comboName:'',
+            temp_money:'',
+            logData:[],
+            radio:[],
         }
     },
     mounted(){
         this.getCombo();
+        this.getLog();
+        
     },
     methods:{
         getCombo(){
@@ -47,30 +60,71 @@ export default{
                 this.money=res.data.money;
                 this.comboName=res.data.combo_name;
                 this.effectLength=res.data.effective_length;
-            })
+                this.temp_effectLength=this.effectLength;
+                this.temp_comboName=this.comboName;
+                this.temp_money=this.money;
+            })   
         },
         editComPayCombo(){
-            this.$confirm('此套餐为通用套餐，一经修改所有项目同时修改', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-            }).then(() => {
-            this.$axios.post("/api/editcompaycombo",{
-                comboName:this.comboName,money:this.money,effectLength:this.effectLength
-            }).then(res=>{
-                 this.$message({
-                    type: 'success',
-                    message: '修改成功!'
+            
+            if(this.effectLength>12){
+                this.$message.error('套餐时长不能超过12个月');
+                this.edit=!this.edit;
+                this.effectLength=this.temp_effectLength;
+            }else if(this.comboName==this.temp_comboName&&this.money==this.temp_money&&this.effectLength==this.temp_effectLength){
+                this.$message.warning('没有做出任何修改');
+                this.edit=!this.edit;
+            }else{
+                this.$confirm('此套餐为通用套餐，一经修改所有项目同时修改', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+                }).then(() => {
+                this.$axios.post("/api/editcompaycombo",{
+                    combo_name:this.comboName,money:this.money,effective_length:this.effectLength
+                }).then(res=>{
+                    this.$message({
+                        type: 'success',
+                        message: '修改成功!'
+                    });
+                     this.edit=!this.edit;
+                     this.getCombo();
                 });
-            });
-           
-            }).catch(() => {
-            this.$message({
-                type: 'info',
-                message: '已取消删除'
-            });          
-            });
-            this.edit=!this.edit;
+                }).catch(() => {
+                    this.money=this.temp_money;
+                    this.combo_name=this.temp_comboName;
+                    this.effective_length=this.effective_length;
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                    this.edit=!this.edit;          
+                });
+            }
+        },
+        getLog(){
+            this.$axios.get("/api/get-log-paycombo",{
+                params:{
+                    combo_id:0
+                }
+            }).then(res=>{
+                console.log(res.data.combo_name)
+                
+                res.data.forEach(element => {
+                    const arr  =
+                    {
+                        id : element.id,
+                        log_combo_name : element.combo_name,
+                        log_effective_length : element.effective_length,
+                        log_money : element.money
+                    }
+                    this.logData.push(arr);
+                });
+                
+                console.log(this.logData);
+                
+                
+            })
         }
     }
 }
