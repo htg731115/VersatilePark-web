@@ -23,7 +23,7 @@
             <el-button v-if="edit" type="success" plain @click="editComPayCombo()">确认修改</el-button>
             <el-button v-else type="primary" plain @click="edit=!edit">修改通用套餐</el-button>
         </el-col>
-        <el-col :span="10">
+        <el-col :span="7" :offset="2">
             <el-card>
                 <div v-for="item in logData" :key="item.index">
                     <el-radio v-model="radio" :label=item.id >套餐名称：{{item.log_combo_name}}，时长：{{item.log_effective_length}},金额：{{item.log_money}} </el-radio>
