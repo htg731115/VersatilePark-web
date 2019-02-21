@@ -10,6 +10,8 @@ import md5 from 'js-md5'
 import store from './store/store.js'
 import echarts from 'echarts'
 import 'element-ui/lib/theme-chalk/index.css'
+import qs from 'qs';
+
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
@@ -17,6 +19,7 @@ Vue.prototype.$echarts =echarts
 Vue.prototype.$axios = axios
 Vue.prototype.$md5=md5
 Vue.prototype.$echarts = echarts
+Vue.prototype.$qs = qs;
 axios.defaults.baseURL = 'http://localhost:8090/'; //配置接口地址
 
 router.beforeEach((to, from, next) => {

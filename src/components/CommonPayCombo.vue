@@ -34,7 +34,7 @@
         </el-col>
         <div class="log_relative">近期六次修改记录</div>
     </el-row>
-   <el-row style="margin-top: 20px;">
+   <el-row style="margin-top: 2vw;">
        <el-button type="primary" plain @click="pushDefault()">写入默认套餐参数</el-button>
        <el-button type="success" plain @click="pushLogComby(radio)">写入已选记录</el-button>
        <el-button type="warning" plain @click="radio=-1">清空已选项</el-button>
@@ -75,6 +75,7 @@ export default{
         },
         editComPayCombo(){
             if(this.effectLength>12){
+                console.log(this.effectLength);
                 this.$message.error('套餐时长不能超过12个月');
                 this.edit=!this.edit;
                 this.effectLength=this.temp_effectLength;
@@ -129,10 +130,7 @@ export default{
                     }
                     this.logData.push(arr);
                 });
-                
-                console.log(this.logData);
-                
-                
+                          
             })
         },
         returnTemp(){
@@ -151,14 +149,13 @@ export default{
             })
         },
         pushLogComby(index){
-            console.log(">>"+index);
-            if(-1==index|| index==""){
-                this.$message.warning('你没有选择一条旧的记录，因此无法读取');
-            }else{                
+            if(index>=0){
                 this.combo_name=this.logData[index].log_combo_name;
                 this.effectLength=this.logData[index].log_effective_length;
                 this.money=this.logData[index].log_money;
                 this.edit=true;
+            }else{
+                this.$message.warning('你没有选择一条旧的记录，因此无法读取');                
             }
         }
     }
