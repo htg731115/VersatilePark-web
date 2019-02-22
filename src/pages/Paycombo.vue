@@ -6,25 +6,29 @@
             <CommonPayCombo/>
         </el-tab-pane>
         <el-tab-pane label="各项目自定义套餐">
-            <Combo_List/>
+            <ComboList/>
         </el-tab-pane>
-        <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+        <el-tab-pane label="角色管理"><LogComboList/> </el-tab-pane>
+        
         <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
         </el-tabs>
+        <SearchComboName/>
     </div>
 </template>
 <script>
     import CommonPayCombo from "../components/CommonPayCombo.vue";
-    import Combo_List from "../components/Combo_List.vue";
+    import ComboList from "../components/Combo_List.vue";
+    import LogComboList from "../components/Log_Combo_List.vue";
+    import SearchComboName from '../components/Search_Combo_Name.vue'
     export default{
-        components:{CommonPayCombo,Combo_List},
+        components:{CommonPayCombo,ComboList,LogComboList,SearchComboName},
         data(){
             return{
                 someone:1,
             }
         },
         mounted(){
-
+            
         },
         methods:{
 

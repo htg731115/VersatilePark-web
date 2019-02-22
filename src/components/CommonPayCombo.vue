@@ -36,7 +36,7 @@
     </el-row>
    <el-row style="margin-top: 2vw;">
        <el-button type="primary" plain @click="pushDefault()">写入默认套餐参数</el-button>
-       <el-button type="success" plain @click="pushLogComby(radio)">写入已选记录</el-button>
+       <el-button type="success" plain @click="pushLogCombo(radio)">写入已选记录</el-button>
        <el-button type="warning" plain @click="radio=-1">清空已选项</el-button>
    </el-row>
 </div>
@@ -135,8 +135,8 @@ export default{
         },
         returnTemp(){
             this.money=this.temp_money;
-            this.combo_name=this.temp_comboName;
-            this.effective_length=this.effective_length;
+            this.comboName=this.temp_comboName;
+            this.effectLength=this.temp_effectLength;
             console.log(this.edit);
             this.edit=false;
         },
@@ -148,9 +148,9 @@ export default{
                 this.edit=true;
             })
         },
-        pushLogComby(index){
+        pushLogCombo(index){
             if(index>=0){
-                this.combo_name=this.logData[index].log_combo_name;
+                this.comboName=this.logData[index].log_combo_name;
                 this.effectLength=this.logData[index].log_effective_length;
                 this.money=this.logData[index].log_money;
                 this.edit=true;
@@ -173,8 +173,16 @@ export default{
 }
 .log_relative{
     position: relative;
-    top: 3vw;
+    top: 2vw;
     right: 8vw;
     font-size: 1.5vw;
 }
+.el-radio{
+    float: left;
+    text-align: left
+}
+.el-radio__input{
+    float: left;
+}
+
 </style>

@@ -5,8 +5,7 @@
         style="width: 100%">
         <el-table-column
             prop="combo_id"
-            label="套餐编号"
-            width="180">
+            label="套餐编号">
         </el-table-column>
         <el-table-column
             prop="combo_name"
@@ -21,8 +20,11 @@
         <el-table-column
             prop="effective_length"
             label="有效时长"
-            width="180">
+            width="100">
             <template slot-scope="scope">{{scope.row.effective_length}}个月</template>
+        </el-table-column>
+        <el-table-column prop="money" label="套餐价格" width="100">
+            <template slot-scope="scope">{{scope.row.money}}元</template>
         </el-table-column>
         <el-table-column
             prop="start_time"
@@ -36,16 +38,15 @@
             prop="manager_name"
             label="管理员">    
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" >
             <template slot-scope="scope">
-                <el-button @click="showDialog(scope.row)"></el-button>
+                <el-button @click="showDialog(scope.row)">修改</el-button>
                 <el-button type="danger" @click="handleDelete(scope.row)">删除</el-button>
             </template>
         </el-table-column>
         </el-table>
-
-        <el-dialog title="修改套餐" :visible.sync="dialogFormVisible" >
-            <el-row ><el-col :span="8" >
+        <div class="dialog_wapper">
+        <el-dialog title="修改套餐"  :visible.sync="dialogFormVisible" >
                 <el-form >
                     <el-form-item label="套餐名称" >
                     <el-input v-model="comboName"></el-input>
@@ -54,13 +55,14 @@
                         <el-input v-model="effectLength"></el-input>
                     </el-form-item>
                     <el-form-item label="套餐价格" >
-                        <el-input v-model="money"></el-input>
-                    </el-form-item>
+                        <el-input v-model="money" style="width: 111px"></el-input>&nbsp;元
+                    </el-form-item >
+                    <el-form-item label="套餐开始时间">
                       <el-date-picker
                         v-model="start_time"
                         type="date"
                         placeholder="选择日期">
-                        </el-date-picker>
+                        </el-date-picker></el-form-item>
                     <el-form-item label="套餐结束时间" >
                         <el-date-picker
                         v-model="end_time"
@@ -69,12 +71,11 @@
                         </el-date-picker>
                     </el-form-item>
                 </el-form>
-            </el-col></el-row>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="dialogFormVisible = false">取 消</el-button>
                 <el-button type="primary" @click="postEdit()">确 定</el-button>
             </div>
-        </el-dialog>
+        </el-dialog></div>
     </div>
         
 
@@ -93,6 +94,7 @@ export default{
             start_time:'',
             end_time:'',
             value:'',
+            temp:[],
         }
     },
     mounted(){
@@ -106,6 +108,7 @@ export default{
                     pageSize:10,
                 }
             }).then(res=>{
+                console.log(res.data.list);
                 this.payComboList=res.data.list;
             })
 
@@ -141,26 +144,47 @@ export default{
             })
         },
         showDialog(payComboData){
-            console.log(payComboData.combo_name)
+            console.log(payComboData);
             this.comboName = payComboData.combo_name;
             this.combo_id = payComboData.combo_id;
             this.effectLength = payComboData.effective_length;
             this.money = payComboData.money;
             this.start_time = new Date(payComboData.start_time);
-            this.end_time = payComboData.end_time;
+            this.end_time = new Date(payComboData.end_time);
             this.dialogFormVisible = true;
-            this.temp_ComboId = payComboData.combo_id;
+            this.temp_ComboId = payComboData.combo_id;        
+            this.temp.push(this.comboName,this.effectLength,this.money,this.start_time,this.end_time);
+            console.log(this.temp);
 
         },
         postEdit(){ 
-            this.$axios.post("/api/edit-paycombo",{
-                combo_name:this.combo_id,money:this.money,effective_length:this.effectLength
+            if(this.temp[0]==this.comboName&&this.temp[1]==this.effectLength&&this.temp[2]==this.money&&this.temp[3]==this.start_time&&this.temp[4]==this.end_time){
+                this.$message.warning('没有填入修改内容，修改失败');
+            }else if(this.effectLength>12){
+                this.$message.error('套餐时长不能超过12个月');
+            }else if(this.start_time>this.end_time){
+                this.$message.error('开始时间不能大于结束时间');
+            }
+            else{
+                this.$axios.post("/api/edit-paycombo",{
+                combo_id:this.combo_id,combo_name:this.comboName,money:this.money,effective_length:this.effectLength,start_time:this.start_time,end_time:this.end_time,
+            }).then(res=>{
+                this.$message({message: '修改成功',type: 'success'});
+                this.getPayComboList();
             })
             this.dialogFormVisible=false;
+            }
         }
 
     }
 }
 </script>
 <style>
+.el-form-item{
+    margin: 10px;
+}
+.el-dialog{
+    width: 20%;
+    
+}
 </style>
