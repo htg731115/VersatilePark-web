@@ -1,5 +1,14 @@
 <template>
     <div>
+        <el-row>
+            <el-col :span="6" :offset="5">
+                <SearchComboName ref="nameSearch"/>
+            </el-col>
+            <el-col :span="6" :offset="1"><SearchProjectName ref="projectSearch"/></el-col>
+            <el-col :span="2" :offset="1"><el-button type="primary" @click="search()" >搜索</el-button></el-col>
+            <el-col :span="1" ><el-button type="primary" >重置</el-button></el-col>
+        </el-row>
+        <el-row>
         <el-table
         :data="payComboList"
         style="width: 100%">
@@ -45,6 +54,10 @@
             </template>
         </el-table-column>
         </el-table>
+        </el-row>
+
+
+
         <div class="dialog_wapper">
         <el-dialog title="修改套餐"  :visible.sync="dialogFormVisible" >
                 <el-form >
@@ -81,7 +94,11 @@
 
 </template>
 <script>
+import SearchComboName from '../components/Search_Combo_Name.vue';
+import SearchProjectName from '../components/Search_Project_Name.vue';
+
 export default{
+    components:{SearchComboName,SearchProjectName},
     data(){
         return{
             pageNum:1,
@@ -174,6 +191,18 @@ export default{
             })
             this.dialogFormVisible=false;
             }
+        },
+        search(){
+            debugger
+            this.$axios.get("/api/search-combo-byName",{
+                params:{
+                    combo_name:(this.$refs.nameSearch.combo_name),
+                    project_name:(this.$refs.projectSearch.project_name),
+                    pageNum:0,
+                    pageSize:10,
+                }}).then(res=>{
+                    
+                })
         }
 
     }

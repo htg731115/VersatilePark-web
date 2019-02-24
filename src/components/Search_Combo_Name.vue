@@ -1,6 +1,6 @@
 <template>
     <div>
-        <el-input v-model="combo_name"/>
+        <el-input v-model="combo_name" placeholder="请输入套餐名称"/>
     </div>
 </template>
 <script>
