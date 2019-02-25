@@ -6,7 +6,7 @@
             </el-col>
             <el-col :span="6" :offset="1"><SearchProjectName ref="projectSearch"/></el-col>
             <el-col :span="2" :offset="1"><el-button type="primary" @click="search()" >搜索</el-button></el-col>
-            <el-col :span="1" ><el-button type="primary" >重置</el-button></el-col>
+            <el-col :span="1" ><el-button type="primary" @click="reset()" >重置</el-button></el-col>
         </el-row>
         <el-row>
         <el-table
@@ -125,15 +125,8 @@ export default{
                     pageSize:10,
                 }
             }).then(res=>{
-                console.log(res.data.list);
                 this.payComboList=res.data.list;
             })
-
-        },
-        button(a,b){
-            console.log(a+"??");
-            console.log(b);
-            
         },
         handleDelete(payComboData){  
             this.$confirm('此套餐为通用套餐，一经修改所有项目同时修改', '提示', {
@@ -161,7 +154,6 @@ export default{
             })
         },
         showDialog(payComboData){
-            console.log(payComboData);
             this.comboName = payComboData.combo_name;
             this.combo_id = payComboData.combo_id;
             this.effectLength = payComboData.effective_length;
@@ -171,11 +163,11 @@ export default{
             this.dialogFormVisible = true;
             this.temp_ComboId = payComboData.combo_id;        
             this.temp.push(this.comboName,this.effectLength,this.money,this.start_time,this.end_time);
-            console.log(this.temp);
+
 
         },
         postEdit(){ 
-            if(this.temp[0]==this.comboName&&this.temp[1]==this.effectLength&&this.temp[2]==this.money&&this.temp[3]==this.start_time&&this.temp[4]==this.end_time){
+            if(this.temp[0]==this.comboName&&this.temp[1]==this.effectLength&&this.temp[2]==this.money&&this.temp[3].getTime()==this.start_time.getTime()&&this.temp[4].getTime()==this.end_time.getTime()){
                 this.$message.warning('没有填入修改内容，修改失败');
             }else if(this.effectLength>12){
                 this.$message.error('套餐时长不能超过12个月');
@@ -188,21 +180,29 @@ export default{
             }).then(res=>{
                 this.$message({message: '修改成功',type: 'success'});
                 this.getPayComboList();
+                this.temp.length=0;
+                this.temp.push(this.comboName,this.effectLength,this.money,this.start_time,this.end_time);
+                console.log(this.temp);
+                console.log(this.money);
             })
             this.dialogFormVisible=false;
             }
         },
         search(){
-            debugger
             this.$axios.get("/api/search-combo-byName",{
                 params:{
                     combo_name:(this.$refs.nameSearch.combo_name),
                     project_name:(this.$refs.projectSearch.project_name),
-                    pageNum:0,
+                    pageNum:1,
                     pageSize:10,
                 }}).then(res=>{
-                    
+                    this.payComboList = res.data.list;
                 })
+        },
+        reset(){
+            this.$refs.nameSearch.combo_name='';
+            this.$refs.projectSearch.project_name='';
+            this.search();
         }
 
     }

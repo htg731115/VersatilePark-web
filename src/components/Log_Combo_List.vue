@@ -15,7 +15,7 @@ export default {
         }
     },
     mounted(){
-        this.$axios.get("api/logList")
+      //  this.$axios.get("api/log-comboList")
     }
 }
 </script>
