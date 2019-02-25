@@ -25,6 +25,13 @@
               <el-menu-item index="/evaluation">用户评价</el-menu-item>
               <el-menu-item index="/paycombo">套餐管理</el-menu-item>
           </el-submenu>
+          <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-tickets"></i>
+              <span>停车管理</span>
+            </template>
+            <ElMenuItem index="/parkingrecord">停车记录</ElMenuItem>
+          </el-submenu>
         </el-menu>
 </div>
 </template>
