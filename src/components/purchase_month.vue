@@ -42,7 +42,7 @@ export default {
                     subtextStyle: {
                         color: '#90979c',
                         fontSize: '16',
-
+                        
                     },
                 },
                 "tooltip": {
