@@ -179,7 +179,7 @@ export default {
                             this.monthValue[11],
                         ]},
                         {
-                                "name": "销量2",
+                                "name": "销量折线 ",
                                 "type": "line",
                                 symbolSize:10,
                                 symbol:'circle',

@@ -119,7 +119,7 @@ export default{
           message: '恭喜你，删除成功',
           type: 'success'
         })
-        setTimeout(() => {this.$router.go(0)}, 1200);
+        setTimeout(() => {this.GetManager(), 1200});
       })
     },
     GoCheck(id){

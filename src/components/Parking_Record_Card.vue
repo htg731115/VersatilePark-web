@@ -1,6 +1,7 @@
 <template>
     <div>
         <el-row style="margin:20px">
+                    <div v-if="parkingRecordList.length!=0">
                         <el-col  :offset="1" v-for="index in parkingRecordList " class="shadow" :key="index.id">
                            <el-card :body-style="{ padding: '0px' }">
                                <div class="header1"><span>{{index.project_name}}</span></div>
@@ -16,7 +17,8 @@
                             </div>
                             </el-card>          
                         </el-col>
-                        
+                    </div>
+                    <div v-else> 暂无数据</div>
             </el-row>
     </div>
 </template>
@@ -47,7 +49,7 @@ export default {
                    end_Date:endDate
                }
            }).then(res=>{
-
+               this.parkingRecordList = res.data.list;
            })
        }
      
