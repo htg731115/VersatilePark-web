@@ -1,28 +1,25 @@
 <template>
+<div>
+    
+    <div  class="app-wrapper">
+      <Menu class="sidebar-container"/>
+    </div>
+    <div>
+      <navbar class="head"/>
+      </div>
+    <div class="main-container">
+      <router-view></router-view>
+    </div>
 
-<div id="Main" >
-  <el-row >
-    <Header/>
-    <el-row>
-      <el-col :span="4" class="menu" >
-        <Menu/>
-      </el-col>
-      <el-col :span="19" class="view">
-        <el-row>
-            <router-view></router-view>
-        </el-row>
-    </el-col>
-  </el-row>
-  </el-row>
 </div>
 </template>
 
 <script>
 import Menu from '../components/Menu.vue'
-import Header from '../components/Header.vue'
+import Navbar from '../components/Navbar.vue'
 export default {
   name:'Main',
-  components:{Menu,Header},
+  components:{Menu,Navbar},
   data(){
     return{
     }
@@ -32,17 +29,6 @@ export default {
 
 
 </script>
-
-<style >
-body{
-  margin: 0px;
-}
-.menu{
-height: 900px;
-background-color: #545c64;
-margin-right: 10px;
-}
-.view{
-padding-left: 30px;
-}
+<style lang="scss">
+@import '../assets/layout.scss';
 </style>

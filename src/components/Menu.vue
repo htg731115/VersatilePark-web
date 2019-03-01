@@ -1,12 +1,15 @@
 <template>
   <div>
+        <div  class="headWord animated fadeIn delay-2s">
+          VersatilePark
+        </div>
         <h5>默认颜色</h5>
         <el-menu
           class="el-menu-vertical-demo"
-          background-color="#545c64"
           text-color="#fff"
           active-text-color="#409EFF"
           :default-active='active'
+          background-color="rgb(69, 76, 83)"
           router>
           <el-submenu index="1">
             <template slot="title">
@@ -67,5 +70,13 @@ export default{
   border-right-width: 0;
   min-width: 100px;
 }
+.headWord{
+    width: 280px;
+    height: 60px;
+    font-size: 40px;
+    color: white;
+    padding-top: 13px;
+    box-shadow: inset 0px 0px 20px 3px hsla(0, 2%, 3%, 0.56);
 
+}
 </style>
