@@ -64,7 +64,10 @@ export default {
                 state = 1;
             else if(this.temp2 == false)
                 state = 2;  
-            this.$refs.ParkingRecordCard.searchByTime(state,this.$refs.timePicker.time[0],this.$refs.timePicker.time[1],1);
+            if(this.$refs.timePicker.time!=null)
+                this.$refs.ParkingRecordCard.searchByTime(state,this.$refs.timePicker.time[0],this.$refs.timePicker.time[1],1);
+            else
+                this.$refs.ParkingRecordCard.getRecord(state,1);
         }
     }
 }
