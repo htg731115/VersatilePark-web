@@ -17,7 +17,7 @@
                         trigger="manual"
                         v-model="visible" style="cursor: auto;">
                         <el-row><el-col :span="8" :offset="3">
-                        <el-button >退出登录</el-button></el-col>
+                        <el-button @click="loginOut()">退出登录</el-button></el-col>
                         </el-row>
                     </el-popover>
                    
@@ -39,10 +39,14 @@ export default {
     },
     methods:{
         click(){
-                screenfull.toggle();
-                this.$store.commit('setUserName','管理员');
-                this.username=this.$store.state.userName;
-            }    
+            screenfull.toggle();
+            this.$store.commit('setUserName','管理员');
+            this.username=this.$store.state.userName;
+        },
+        loginOut(){
+            this.$store.commit('loginOut');
+            this.username=this.$store.state.userName;
+        }        
     }
 }
 </script>
