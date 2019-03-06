@@ -2,10 +2,12 @@
     <div>
         <el-row>
             <el-col :span="4"  >
+                
                 1
             </el-col>
             <el-col :span="5" :offset="10">
                 <img src="../assets/full.svg" class="full-img" @click="click()"/>
+                {{username}}
                 <img src="../assets/userlog.svg" class="full-img" width="100%">
             </el-col>
         </el-row>
@@ -16,15 +18,14 @@ import screenfull from 'screenfull'
 export default {
     data(){
         return{
-            click(){
-                screenfull.toggle();
-            }
+            username:this.$store.state.userName,
         }
     },
     methods:{
         click(){
-            console.log("111")
-        }
+                screenfull.toggle();
+                this.$store.commit('setUserName','helloworld');
+            }    
     }
 }
 </script>
