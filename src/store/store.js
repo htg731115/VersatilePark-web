@@ -6,10 +6,10 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   // 定义状态
   state: {
-    userName: 'Wise Wrong'
+    userName: "",
   },
   mutations: {
-    setuserName (userName) {
+    setUserName (state,userName) {
       state.userName=userName;
     }
   }
