@@ -34,6 +34,7 @@
               <span>停车管理</span>
             </template>
             <ElMenuItem index="/parkingrecord">停车记录</ElMenuItem>
+            <ElMenuItem index="/portrecord">闸口监控</ElMenuItem>
           </el-submenu>
         </el-menu>
 </div>
