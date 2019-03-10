@@ -4,7 +4,7 @@
             <selectProject ref="selectProject"/>
         </el-row>
         <el-row>
-            <el-col :span="10" :offset="2">
+            <el-col :span="10" >
                 <el-card >
                     <img src="../assets/timg.jpg" style="width:100%"/>
                 </el-card>
@@ -23,16 +23,30 @@
                     </el-timeline-item>
                 </el-timeline>
             </el-col>
+            <el-col :span="8">
+                <portPie/>
+            </el-col>
         </el-row>
-        <div>车牌号码：{{this.platerNum}}</div>
+        <div> <div v-if="flag==true"  class="numberWapper">车牌号码：{{plateNum}}<el-button type="mini" @click="changePlateNum()">纠错</el-button></div>
+            <div style="margin-left:20% ;display: flex;" v-else><el-input class="numberWapper2" v-model="plateNum" placeholder="请输入车牌号码"></el-input><el-button style="margin-left:10%" type="primary">确定</el-button><el-button type="info" @click="cancel()">取消</el-button></div>
+        </div>
+        <el-row>
+            <el-card>
+                
+            </el-card>
+        </el-row>
     </div>    
+
 </template>
 <script>
 import selectProject from "../components/Select/Select_Project.vue";
+import portPie from "../components/echart/portPie.vue";
 export default {
-    components:{selectProject},
+    components:{selectProject,portPie},
     data(){
         return {
+            plateNum:'',
+            temp:null,
             activities2: [{
                 content: '车辆入场识别',
                 timestamp: '2018-02-12 20:46',
@@ -51,7 +65,7 @@ export default {
                 timestamp: '2018-04-03 20:46',
                 size: 'large',
                 }],
-            plateNum:null,
+            flag:true,
         }
     },
     mounted(){
@@ -81,13 +95,37 @@ export default {
                 this.activities2[index].icon='el-icon-check'; 
                 this.activities2[index].color = '#409EFF';
                 this.plateNum = res.data.plate_number;
-                console.log(this.activities2);
+            })
+        },
+        changePlateNum(){
+            this.flag=false;
+            this.temp=this.plateNum;
+        },  
+        cancel(){
+            this.flag=true;
+            this.plateNum=this.temp;
+        },
+        alterPortNum(){
+            this.$axios.post("/aip/alter-port-record-plateNum",{
+                plateNum:this.plateNum,
+            }).then(res=>{
+                
             })
         }
     }
 }
 </script>
 <style>
+.numberWapper{
+   margin-left: 20%;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
 
+}
+.numberWapper2{
+    width: 20%;
+    font-size: 30px
+}
 </style>
 

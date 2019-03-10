@@ -17,6 +17,7 @@
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
     "echarts": "^4.2.0-rc.2",
+    "echarts-liquidfill": "^2.0.4",
     "element-ui": "^2.6.1",
     "js-md5": "^0.7.3",
     "screenfull": "^4.0.1",
