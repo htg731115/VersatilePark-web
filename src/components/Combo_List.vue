@@ -182,8 +182,6 @@ export default{
                 this.getPayComboList();
                 this.temp.length=0;
                 this.temp.push(this.comboName,this.effectLength,this.money,this.start_time,this.end_time);
-                console.log(this.temp);
-                console.log(this.money);
             })
             this.dialogFormVisible=false;
             }

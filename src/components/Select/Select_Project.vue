@@ -1,6 +1,6 @@
 <template>
     <div>
-    <el-select v-model="selectProject" placeholder="请选择"> 
+    <el-select v-model="selectProject" placeholder="请选择" @change="changeSelect()"> 
         <el-option v-for="item in projectList"
         :key="item.id"
         :label="item.name"
@@ -14,7 +14,7 @@ export default {
     data(){
         return{
             projectList:[],
-            selectProject:null,
+            selectProject:'',
         }
     },
     mounted(){
@@ -24,7 +24,12 @@ export default {
         initSelectProject(){
             this.$axios.get('/api/getallproject').then(res=>{
                 this.projectList=res.data;
+                this.selectProject = this.projectList[0].id;
+                this.$emit('success',this.selectProject);
             })
+        },
+        changeSelect(){
+            this.$emit('changeProject',this.selectProject);
         }
     }
 }

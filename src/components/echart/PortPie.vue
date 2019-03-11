@@ -6,7 +6,8 @@ import 'echarts-liquidfill';
 export default {
     data(){
         return{
-
+            freeParkingNum:0,
+            percent:0.3,
         }
     },
     mounted(){
@@ -14,58 +15,43 @@ export default {
     },
     methods:{
         initPie(){
+            var _this = this;
             var myChart = this.$echarts.init(document.getElementById('main'));
-            var value = 0.50
-            var data = []
-            data.push(value)
-            data.push(value)
-            data.push(value)
-            data.push(value)
-            data.push(value)
-            // var option = {
-            //     backgroundColor: '#FFFFFF',
-            //     title: {
-            //         text: '停车位剩余',
-            //         textStyle: {
-            //             fontWeight: 'normal',
-            //             fontSize: 25,
-            //             color: 'rgb(97, 142, 205)'
-            //         }
-            //     },
-            //     series: [{
-            //         type: 'liquidFill',
-            //         radius: '80%',
-            //         data: data,
-            //         backgroundStyle: {
-            //             borderWidth: 5,
-            //             borderColor: 'rgb(255,0,255,0.9)',
-            //             color: 'rgb(255,0,255,0.01)'
-            //         },
-            //         label: {
-            //             normal: {
-            //                 formatter: value * 100 + '%',
-            //                 textStyle: {
-            //                     fontSize: 50
-            //                 }
-            //             }
-            //         }
-            //     }]
-            // }
             var option = {
                 title: {
-                    text: '该停车场剩余车位百分比',
+                    text: '剩余车位数'+_this.freeParkingNum,
                     textStyle: {
                         fontWeight: 'normal',
                         fontSize: 25,
                         color: 'rgb(97, 142, 205)'
                     },
                 },
+                tooltip:{
+                    show:true,
+                    formatter: function(a){
+                        return ('停车场剩余车位:'+_this.freeParkingNum);
+                    }
+                },
                 series: [{
+                    name: '无记录',
                     type: 'liquidFill',
-                    data: [0.6]
-                }]
+                    data: [_this.percent],
+                }],
+                
             };
             myChart.setOption(option);
+        },  
+        getFreeParking(projectId){
+            this.$axios.get("/api/get-free-parking",{
+                params:{
+                    projectId:projectId,
+                }
+            }).then(res=>{
+               this.percent = res.data.percent;
+               this.freeParkingNum =  res.data.freeParkingNum
+
+               this.initPie();
+            })
         }
     }    
 }
