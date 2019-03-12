@@ -166,7 +166,14 @@ export default {
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(()=>{
-                    this.$axios.post("/api/")
+                    let postData = this.$qs.stringify({
+                        id:this.recordId,
+                        managerId:4,
+                        reason:this.reason,
+                    })
+                    this.$axios.post("/api/open-port",postData).then(res=>{
+                        
+                    })
                 })
             }
         }
