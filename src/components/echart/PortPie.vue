@@ -1,5 +1,5 @@
 <template>
-     <div id="main" style="width: 400px;height:400px;"></div>
+     <div id="main" style="width: 400px;height:341px;"></div>
 </template>
 <script>
 import 'echarts-liquidfill';

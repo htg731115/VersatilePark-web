@@ -36,7 +36,12 @@
         
         <el-row>
             <el-card>
-                
+                <el-table :data="logOpenPortList">
+                  <ElTableColumn prop="id" label="停车记录序号"/>
+                  <ElTableColumn prop="project_name" label="停车项目"/>
+                  <ElTableColumn prop="manager_name" label="管理员"/>
+                  <ElTableColumn prop="out_time" label="开闸时间"/>
+                </el-table>
             </el-card>
         </el-row>
 
@@ -61,6 +66,7 @@ export default {
             temp:null,
             recordId:null,
             reason:"",
+            logOpenPortList:[],
             dialogFormVisible:false,
             processFlag:0,
             activities2: [{
@@ -124,7 +130,7 @@ export default {
         cancel(){
             this.flag=true;
             this.plateNum=this.temp;
-            this.projectId2 = this.$refs.selectProject;
+            this.getLogOpenList();
         },
         alterPortNum(){
             if(this.plateNum==this.temp){
@@ -176,6 +182,16 @@ export default {
                     })
                 })
             }
+        },
+        getLogOpenList(){
+            this.$axios.get("/api/get-log-open-record",{
+                params:{
+                    projectId:this.$refs.selectProject.selectProject,
+                    pageNum:1,
+                }
+            }).then(res=>{
+                this.logOpenPortList = res.data.list;
+            })
         }
     }
 }
