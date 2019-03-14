@@ -12,6 +12,7 @@ import Evaluation from '@/pages/Evaluation'
 import PayCombo from '@/pages/PayCombo'
 import ParkingRecord from '@/pages/ParkingRecord'
 import PortRecord from '@/pages/PortRecord'
+import CarFlow from '@/pages/CarFlow'
 Vue.use(Router)
 
 export default new Router({
@@ -44,7 +45,8 @@ export default new Router({
         {path:'/evaluation',name:'Evaluation',component:Evaluation},
         {path:'/paycombo',name:'PayCombo',component:PayCombo},
         {path:'/parkingrecord',name:'ParkingRecord',component:ParkingRecord},
-        {path:'/portrecord',name:'PortRecord',component:PortRecord}],
+        {path:'/portrecord',name:'PortRecord',component:PortRecord},
+        {path:'/carflow',name:'CarFlow',component:CarFlow}],
       meta:{
          requiresAuth: true
       }

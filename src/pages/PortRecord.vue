@@ -96,8 +96,12 @@ export default {
         init(){
             this.getPortRecord();
             this.$refs.portPie.getFreeParking(this.$refs.selectProject.selectProject);
+            this.getLogOpenList();
         },
         getPortRecord(){
+            this.activities2.timestamp="";
+            this.plateNum = "";
+
             this.$axios.get('/api/get-port-record',{
                 params:{
                     projectId:this.$refs.selectProject.selectProject,
@@ -150,6 +154,7 @@ export default {
                     this.$axios.post("/api/alter-port-record-plateNum",postData).then(res=>{
                         this.temp = this.plateNum;
                         this.flag = true;
+                        this.$message.success("修改成功");
                     })})
             }
         },
@@ -178,7 +183,8 @@ export default {
                         reason:this.reason,
                     })
                     this.$axios.post("/api/open-port",postData).then(res=>{
-                        
+                        this.reason="";
+                        this.getLogOpenList();
                     })
                 })
             }

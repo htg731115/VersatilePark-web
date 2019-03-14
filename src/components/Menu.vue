@@ -35,6 +35,7 @@
             </template>
             <ElMenuItem index="/parkingrecord">停车记录</ElMenuItem>
             <ElMenuItem index="/portrecord">闸口监控</ElMenuItem>
+            <ElMenuItem index="/carflow">车量负载率统计</ElMenuItem>
           </el-submenu>
         </el-menu>
 </div>
