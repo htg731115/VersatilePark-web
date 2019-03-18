@@ -1,20 +1,21 @@
 <template>
-    <div id="main" style="width: 800px;height:341px;"></div>
+    <div id="main" style="width: 100%;height:600px; margin-top:40x"></div>
 </template>
 <script>
 export default {
     data(){
         return{
-
+            data:[]
         }
     },
     mounted(){
-        this.init();
+        this.getCarFlow();
     },
     methods:{
         init(){
+            var data = this.data;
             var myChart = this.$echarts.init(document.getElementById('main'));
-            var data_val = [2220, 1682, 2791, 3000, 4090, 3230, 2910],xAxis_val = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            var data_val = [data[5].carNum,data[4].carNum,data[3].carNum,data[2].carNum,data[1].carNum,data[0].carNum],xAxis_val = [data[5].time,data[4].time,data[3].time,data[2].time,data[1].time,data[0].time];
             var data_val1 = [0, 0, 0, 0, 0, 0, 0];
             var option = {
             backgroundColor: '#293042',
@@ -36,13 +37,13 @@ export default {
             legend: {
                 right: 0,
                 top: 0,
-                data: ['距离'],
+                data: ['车流量'],
                 textStyle: {
                     color: '#5c6076'
                 }
             },
             title: {
-                text: '跑步数据检测',
+                text: '停车场流量统计',
                 x: '4.5%',
                 top: '1%',
                 textStyle: {
@@ -110,7 +111,7 @@ export default {
                 },
                 {
                     type: 'line',
-                    name: '距离',
+                    name: '车流量',
 
                     animation: false,
                     symbol: 'circle',
@@ -166,6 +167,14 @@ export default {
             ]
         };
             myChart.setOption(option);
+        },
+        getCarFlow(){
+            var _this = this;
+            this.$axios.get("/api/get-carFlow").then(res=>{    
+                this.data = res.data;
+                console.log(this.data);
+                this.init();
+            })
         }
     }
 }
