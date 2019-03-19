@@ -14,9 +14,9 @@
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-tickets"></i>
-              <span>停车场项目</span>
+              <span>个人信息</span>
             </template>
-              <el-menu-item index="/Main/project" >项目列表</el-menu-item>
+              <el-menu-item index="/Manager/person" >修改个人详细信息</el-menu-item>
               <el-menu-item index="/Main/manager">管理员</el-menu-item>
           </el-submenu>
           <el-submenu index="2">

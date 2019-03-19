@@ -56,7 +56,6 @@ export default {
   methods:{
     submit:function(LoginForm)
     {
-      this.$store.commit('In_Login')
       this.$refs.LoginForm.validate((valid) => {//表单是否符合规则
         if (valid) {
           this.loading=true
@@ -67,10 +66,18 @@ export default {
         // success callback
           setTimeout(() => {
                     this.loading = false}, 500)//设置按钮延迟
-          if(response.data==true){
+          if(response.data!=null){
             this.Remessage="登录成功了"
-            this.$store.commit('In_Login')
-            this.$router.push({path: '/project'});
+            var userType = response.data.user_type;
+            var id = response.data.id;
+            var name = response.data.name;
+            debugger;
+            this.$store.commit('setLogin',id,userType);
+            this.$store.commit('setUserName',name);
+            if(userType ==0)
+              this.$router.push({path: 'Main/project'});
+            else(userType ==1)
+              this.$router.push({path: 'Manager/person'});
           }else
             this.Remessage="登录失败,密码错误"
           this.$notify({

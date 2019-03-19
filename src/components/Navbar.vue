@@ -33,14 +33,19 @@ import screenfull from 'screenfull'
 export default {
     data(){
         return{
-            username:this.$store.state.userName,
+            username:"",
             visible: false,
         }
     },
+    mounted(){
+        this.init();
+    },
     methods:{
+        init(){
+            this.username=this.$store.state.userName;
+        },
         click(){
             screenfull.toggle();
-            this.$store.commit('setUserName','管理员');
             this.username=this.$store.state.userName;
         },
         loginOut(){

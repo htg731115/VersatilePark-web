@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Index from '@/pages/Index'
 import Main from '@/pages/Main'
+import Main2 from '@/pages/Main_Manager'
 import Register from '@/pages/Register'
 import Menu from '@/components/Menu'
 import Manager from '@/pages/Manager'
@@ -13,6 +14,7 @@ import PayCombo from '@/pages/PayCombo'
 import ParkingRecord from '@/pages/ParkingRecord'
 import PortRecord from '@/pages/PortRecord'
 import CarFlow from '@/pages/CarFlow'
+import Person from '@/pages/Manager/Person'
 Vue.use(Router)
 
 export default new Router({
@@ -38,15 +40,26 @@ export default new Router({
       name:'Main',
       component: Main,
       children:[
-        {path:'/project',name:'Project',component:Project},
-        {path:'/manager',name:'Manager',component:Manager},
-        {path:'/manager/detail/:id',name:'Detail',component:Detail},
-        {path:'/customer',name:'Customer',component:Customer},
-        {path:'/evaluation',name:'Evaluation',component:Evaluation},
-        {path:'/paycombo',name:'PayCombo',component:PayCombo},
-        {path:'/parkingrecord',name:'ParkingRecord',component:ParkingRecord},
-        {path:'/portrecord',name:'PortRecord',component:PortRecord},
-        {path:'/carflow',name:'CarFlow',component:CarFlow}],
+        {path:'/Main/project',name:'Project',component:Project},
+        {path:'/Main/manager',name:'Manager',component:Manager},
+        {path:'/Main/manager/detail/:id',name:'Detail',component:Detail},
+        {path:'/Main/customer',name:'Customer',component:Customer},
+        {path:'/Main/evaluation',name:'Evaluation',component:Evaluation},
+        {path:'/Main/paycombo',name:'PayCombo',component:PayCombo},
+        {path:'/Main/parkingrecord',name:'ParkingRecord',component:ParkingRecord},
+        {path:'/Main/portrecord',name:'PortRecord',component:PortRecord},
+        {path:'/Main/carflow',name:'CarFlow',component:CarFlow}],
+      meta:{
+         requiresAuth: true
+      }
+    },
+    {
+      path:'/Manager',
+      name:'Manager',
+      component: Main2,
+      children:[
+        {path:'/Manager/person',name:'person',component:Person},
+      ],
       meta:{
          requiresAuth: true
       }
