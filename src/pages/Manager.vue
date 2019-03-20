@@ -91,7 +91,7 @@ export default{
     this.GetEmptyProject();
   },
   methods:{
-    GetManager :function(){
+    GetManager(){
       this.$axios.get('api/getmanager2',{
         params:{
           pageNum:this.pageNum
