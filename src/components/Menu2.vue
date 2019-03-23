@@ -17,14 +17,14 @@
               <span>个人信息</span>
             </template>
               <el-menu-item index="/Manager/person" >修改个人详细信息</el-menu-item>
-              <el-menu-item index="/Main/manager">管理员</el-menu-item>
+              <el-menu-item index="/Manager/changepassword">修改密码</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-news"></i>
-              <span>运营管理</span>
+              <span>项目管理</span>
             </template>
-              <el-menu-item index="/Main/customer">用户管理</el-menu-item>
+              <el-menu-item index="/Manager/project">停车场管理</el-menu-item>
               <el-menu-item index="/Main/evaluation">用户评价</el-menu-item>
               <el-menu-item index="/Main/paycombo">套餐管理</el-menu-item>
           </el-submenu>

@@ -20,7 +20,7 @@ Vue.prototype.$axios = axios
 Vue.prototype.$md5=md5
 Vue.prototype.$echarts = echarts
 Vue.prototype.$qs = qs;
-axios.defaults.baseURL = 'http://localhost:8090/'; //配置接口地址
+axios.defaults.baseURL = 'http://localhost:8080/'; //配置接口地址
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)){

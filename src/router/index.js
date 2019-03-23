@@ -15,6 +15,8 @@ import ParkingRecord from '@/pages/ParkingRecord'
 import PortRecord from '@/pages/PortRecord'
 import CarFlow from '@/pages/CarFlow'
 import Person from '@/pages/Manager/Person'
+import ChangePassword from '@/pages/Manager/ChangePassword'
+import ManagerProject from '@/pages/Manager/Project'
 Vue.use(Router)
 
 export default new Router({
@@ -59,6 +61,8 @@ export default new Router({
       component: Main2,
       children:[
         {path:'/Manager/person',name:'person',component:Person},
+        {path:'/Manager/changepassword',name:'changepassword',component:ChangePassword},
+        {path:'/Manager/project',name:'managerProject',component:ManagerProject}
       ],
       meta:{
          requiresAuth: true

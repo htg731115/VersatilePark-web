@@ -61,7 +61,6 @@ export default {
             this.temp.name = this.dataList.name;
             this.temp.idNum = this.dataList.id_Num;
             this.temp.phoneNum = this.dataList.phone_Num;
-            console.log(res.data);
         })
     },
       returnTemp(){
@@ -77,7 +76,8 @@ export default {
               phone_Num:this.dataList.phone_Num,
               name:this.dataList.name,
           }).then(res=>{
-
+              this.changeFlag = false;
+              this.$message.success("修改成功");
           })
       }
     }
