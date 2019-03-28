@@ -66,9 +66,9 @@ export default {
         // success callback
           setTimeout(() => {
                     this.loading = false}, 500)//设置按钮延迟
-          if(response.data!=null){
+          if(response.data.id!=null){
             this.Remessage="登录成功了"
-            var userType = response.data.user_type;
+            var userType = response.data.user_Type;
             var id = response.data.id;
             var name = response.data.name;
             debugger;
@@ -76,8 +76,11 @@ export default {
             this.$store.commit('setUserName',name);
             if(userType ==0)
               this.$router.push({path: 'Main/project'});
-            else(userType ==1)
+            else if(userType ==1){
+              this.$store.commit('setPorjectId',response.data.proectId);
               this.$router.push({path: 'Manager/person'});
+
+            }
           }else
             this.Remessage="登录失败,密码错误"
           this.$notify({

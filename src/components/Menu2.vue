@@ -33,8 +33,8 @@
               <i class="el-icon-tickets"></i>
               <span>停车管理</span>
             </template>
-            <ElMenuItem index="/Main/parkingrecord">停车记录</ElMenuItem>
-            <ElMenuItem index="/Main/portrecord">闸口监控</ElMenuItem>
+            <ElMenuItem index="/Manager/parkingrecord">停车记录</ElMenuItem>
+            <ElMenuItem index="/Manager/portrecord">闸口监控</ElMenuItem>
             <ElMenuItem index="/Main/carflow">车量负载率统计</ElMenuItem>
           </el-submenu>
         </el-menu>
