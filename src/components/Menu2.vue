@@ -25,7 +25,7 @@
               <span>项目管理</span>
             </template>
               <el-menu-item index="/Manager/project">停车场管理</el-menu-item>
-              <el-menu-item index="/Main/evaluation">用户评价</el-menu-item>
+              <el-menu-item index="/Manager/evaluation">用户评价</el-menu-item>
               <el-menu-item index="/Main/paycombo">套餐管理</el-menu-item>
           </el-submenu>
           <el-submenu index="3">

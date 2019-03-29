@@ -74,10 +74,11 @@ export default {
             debugger;
             this.$store.commit('setLogin',id,userType);
             this.$store.commit('setUserName',name);
+            this.$store.commit('setPorjectId',projectId);
+            console.log(this.$store);
             if(userType ==0)
               this.$router.push({path: 'Main/project'});
             else if(userType ==1){
-              this.$store.commit('setPorjectId',response.data.proectId);
               this.$router.push({path: 'Manager/person'});
 
             }
