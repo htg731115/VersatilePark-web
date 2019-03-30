@@ -20,6 +20,7 @@ import ManagerProject from '@/pages/Manager/Project'
 import ManagerParkingRecord from '@/pages/Manager/ParkingRecord'
 import ManagerPortRecord from '@/pages/Manager/PortRecord'
 import ManagerEvaluation from '@/pages/Manager/Evaluation'
+import test1 from '@/components/echart/WordCloud'
 Vue.use(Router)
 
 export default new Router({
@@ -67,7 +68,7 @@ export default new Router({
         {path:'/Manager/changepassword',name:'changepassword',component:ChangePassword},
         {path:'/Manager/project',name:'managerProject',component:ManagerProject},
         {path:'/Manager/parkingrecord',name:'managerParkingRecord',component:ManagerParkingRecord},
-        {path:'/Manager/portrecord',name:'managerPortRecord',component:ManagerPortRecord},
+        {path:'/Manager/portrecord',name:'managerPortRecord',component:test1},
         {path:'/Manager/evaluation',name:'managerEvaluation',component:ManagerEvaluation},
       ],
       meta:{

@@ -71,6 +71,7 @@ export default {
             var userType = response.data.user_Type;
             var id = response.data.id;
             var name = response.data.name;
+            var projectId = response.data.projectId;
             debugger;
             this.$store.commit('setLogin',id,userType);
             this.$store.commit('setUserName',name);
