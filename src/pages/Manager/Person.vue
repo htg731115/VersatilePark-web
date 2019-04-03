@@ -27,7 +27,7 @@
                 </el-row>
             </el-col>
             <el-col :span="5">
-                <img src="../../assets/timg.jpg" class="img"/>
+                <img :src="dataList.imgSrc" class="img"/>
             </el-col>
         </el-row>
           <el-row>
@@ -101,6 +101,7 @@ $imgheight:400px;
 .img{
     border: 2px solid #d7dae2;
     height: $imgheight;
+    width: 700px;
 }
 .itemMargin{
     margin-top: 20px;

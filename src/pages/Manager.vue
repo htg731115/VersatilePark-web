@@ -58,17 +58,13 @@
         </el-col>
       </el-row>
     </el-row>
-    <el-row>
-      <el-col :span="10" :offset=6>
          <el-pagination
            @current-change="handleCurrentChange"
            :current-page.sync="pageNum"
-           background
+           small
            layout="prev, pager, next, jumper"
            :total="totalPages">
          </el-pagination>
-     </el-col>
-   </el-row>
   </div>
 </template>
 <script>

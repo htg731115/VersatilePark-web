@@ -1,5 +1,21 @@
 <template>
     <div>
+          <el-dialog title="上传头像" width="30%" :visible.sync="dialogVisible">
+          <el-upload
+            class="upload-demo"
+            drag
+            action="http://localhost:8080/api/manager-upload-img"
+            multiple>
+            <i class="el-icon-upload"></i>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+          </el-upload>
+        </el-dialog>
+
+      <el-row style="margin-top:40px">
+        <el-button type="primary" @click="dialogVisible = true">点击此处上传头像</el-button>
+      </el-row>
+
         <el-row style="margin-top:40px">
          <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
             <el-form-item label="旧密码" prop="oldPass">
@@ -17,6 +33,7 @@
             </el-form-item>
         </el-form>
         </el-row>
+        
     </div>
 </template>
 
@@ -56,7 +73,8 @@
             { validator: validatePass2, trigger: 'blur' }
           ],
           oldPass:[{ required:true ,message:"请输入密码",trigger:'blur'},{min:6,max:16,message:"密码长度有误"}]
-        }
+        },
+        dialogVisible:false,
       };
     },
     methods: {
@@ -67,9 +85,9 @@
             password:this.$md5(this.ruleForm2.pass),
                 id:this.$store.state.userId,
                 oldPassword:this.$md5(this.ruleForm2.oldPass)
-});
+          });
 
-             this.$axios({
+          this.$axios({
             url:'api/update-manager-password',
                 method: 'post',
                 data: postData,

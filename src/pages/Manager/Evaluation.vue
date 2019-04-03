@@ -71,12 +71,18 @@
        </el-form-item>
        </el-form>
      </el-dialog>
-
+    <el-row>
+        <el-col :offset="4" :span="20">
+        <wordCloud/>
+        </el-col>
+    </el-row>
     </div>
 </template>
 
 <script>
+import wordCloud from '../../components/echart/WordCloud.vue'
 export default {
+    components:{wordCloud},
     data(){
         return{
             evaluationDate:[],
@@ -104,7 +110,8 @@ export default {
         handle(evaluationItem){
             this.secondDegress=null;
             this.ShowDialog=true;
-            this.dialogDate=evaluationItem;
+
+            this.dialogDate=JSON.parse(JSON.stringify(evaluationItem));
          
         },
         cancel(){
