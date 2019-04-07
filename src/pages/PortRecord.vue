@@ -9,7 +9,7 @@
         <el-row>
             <el-col :span="10" >
                 <el-card >
-                    <img src="../assets/timg.jpg" style="width:100%"/>
+                    <img :src="this.$store.state.server+imgSrc" style="width:100%"/>
                 </el-card>
             </el-col>
             <el-col :span="5">
@@ -30,7 +30,7 @@
                 <portPie ref="portPie"/>
             </el-col>
         </el-row>
-        <div> <div v-if="flag==true"  class="numberWapper">车牌号码：{{plateNum}}<el-button type="mini" @click="changePlateNum()">纠错</el-button> </div>
+        <div> <div v-if="flag==true"  class="numberWapper">车牌号码：{{plateNum}}<el-button type="mini" @click="changePlateNum()">纠错</el-button><el-button type="mini" @click="ocrPlateNum()">智能纠错</el-button> </div>
             <div style="margin-left:20% ;display: flex;" v-else><el-input class="numberWapper2" v-model="plateNum" placeholder="请输入车牌号码"></el-input><el-button style="margin-left:10%" @click="alterPortNum()" type="primary">确定</el-button><el-button type="info" @click="cancel()">取消</el-button></div>
         </div>
         
@@ -88,6 +88,7 @@ export default {
                 size: 'large',
                 }],
             flag:true,
+            imgSrc:'',
         }
     },
     mounted(){
@@ -125,6 +126,7 @@ export default {
                 this.activities2[this.processFlag].color = '#409EFF';
                 this.plateNum = res.data.plate_number;
                 this.recordId = res.data.id;
+                this.imgSrc = res.data.imgSrc;
             })
         },
         changePlateNum(){
@@ -197,6 +199,22 @@ export default {
                 }
             }).then(res=>{
                 this.logOpenPortList = res.data.list;
+            })
+        },
+        ocrPlateNum(){
+            this.$axios.get("/api/ocr-platenumber",{
+                params:{
+                    imgSrc : this.imgSrc
+
+            }}).then(res=>{
+                if(res.data =="bad"){
+                    this.$message.error("无法识别")
+                }
+                else{
+                    this.flag = !this.flag;
+                    this.temp = this.plateNum;
+                    this.plateNum = res.data;
+                }
             })
         }
     }

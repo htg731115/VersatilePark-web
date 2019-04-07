@@ -43,5 +43,5 @@ new Vue({
   axios,
   store,
   echarts,
-  template: '<App/>'
+  template: '<App/>',
 })

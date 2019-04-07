@@ -26,7 +26,7 @@
             </template>
               <el-menu-item index="/Manager/project">停车场管理</el-menu-item>
               <el-menu-item index="/Manager/evaluation">用户评价</el-menu-item>
-              <el-menu-item index="/Main/paycombo">套餐管理</el-menu-item>
+              <el-menu-item index="/Manager/paycombo">套餐管理</el-menu-item>
           </el-submenu>
           <el-submenu index="3">
             <template slot="title">

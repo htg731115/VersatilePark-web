@@ -32,9 +32,6 @@
        <el-form  label-width="70px" v-model="dialogDate">
          <el-row>
              <el-col :span="10">
-                <el-form-item label="项目名称" >
-                <el-input :disabled="true"></el-input>
-                </el-form-item>
                     <el-form-item label="满意度">
                     <el-input v-if="dialogDate.degress==1" :disabled="true" value="好评"/>
                     <el-input v-else-if="dialogDate.degress==2" :disabled="true" value="中评"/>
@@ -52,13 +49,16 @@
                         <el-option :value="3" label="已处理"/>
                      </el-select>
                  </el-form-item>
-                 <el-form-item label="回访满意度" label-width="100px" style="float:left">
+                 
+                 <el-form-item label="回访满意度" label-width="100px" >
+                    <div style="float:left">
                     <el-select v-model="secondDegress" placeholder="请选择回访满意度">
                         <el-option :value="0" label="未回访"/>
                         <el-option v-if="dialogDate.handler_status!=1" :value="1" label="回访满意度差"/>
                         <el-option v-if="dialogDate.handler_status!=1" :value="2" label="回访满意度一般"/>
                         <el-option v-if="dialogDate.handler_status!=1" :value="3" label="回访满意度满意"/>
                     </el-select>
+                    </div>
                  </el-form-item>
                  <el-form-item label="反馈记录">
                      <el-input type="textarea" v-model="managerContent" placeholder=""></el-input>
@@ -88,7 +88,7 @@ export default {
             evaluationDate:[],
             ShowDialog:false,
             dialogDate:[],
-            secondDegress:null,
+            secondDegress:'',
             managerContent:null,
         }
     },
@@ -108,7 +108,7 @@ export default {
             })
         },
         handle(evaluationItem){
-            this.secondDegress=null;
+            this.secondDegress='';
             this.ShowDialog=true;
 
             this.dialogDate=JSON.parse(JSON.stringify(evaluationItem));

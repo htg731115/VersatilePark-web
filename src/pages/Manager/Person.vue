@@ -33,7 +33,7 @@
           <el-row>
                 <el-button v-if="changeFlag" type="success" plain @click="editManagerInfo()">确认修改</el-button>
                 <el-button v-if="changeFlag" type="danger" plain @click="returnTemp()">取消</el-button>
-                <el-button v-else type="primary" plain @click="changeFlag=!changeFlag">修改通用套餐</el-button>
+                <el-button v-else type="primary" plain @click="changeFlag=!changeFlag">修改个人资料</el-button>
             </el-row>
     </div>
 </template>
@@ -61,6 +61,7 @@ export default {
             this.temp.name = this.dataList.name;
             this.temp.idNum = this.dataList.id_Num;
             this.temp.phoneNum = this.dataList.phone_Num;
+            console.log(this.$store.state)
         })
     },
       returnTemp(){
