@@ -6,15 +6,18 @@ import router from './router'
 import ElementUI from 'element-ui'
 import animate from 'animate.css'
 import axios from 'axios'
+import Vant from 'vant'
 import md5 from 'js-md5'
 import store from './store/store.js'
 import echarts from 'echarts'
 import 'element-ui/lib/theme-chalk/index.css'
+import 'vant/lib/index.css';
 import qs from 'qs';
 
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
+Vue.use(Vant);
 Vue.prototype.$echarts =echarts
 Vue.prototype.$axios = axios
 Vue.prototype.$md5=md5

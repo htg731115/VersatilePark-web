@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Index from '@/pages/Index'
 import Main from '@/pages/Main'
 import Main2 from '@/pages/Main_Manager'
-import Register from '@/pages/Register'
+import Register from '@/pages/User/Register'
 import Menu from '@/components/Menu'
 import Manager from '@/pages/Manager'
 import Project from '@/pages/Project'
@@ -21,6 +21,9 @@ import ManagerParkingRecord from '@/pages/Manager/ParkingRecord'
 import ManagerPortRecord from '@/pages/Manager/PortRecord'
 import ManagerEvaluation from '@/pages/Manager/Evaluation'
 import ManagerPayCombo from '@/pages/Manager/PayCombo'
+import UserLogin from '@/pages/User/Login'
+import UserMain from '@/pages/User/Main'
+import userBuyCombo from '@/pages/User/userBuyCombo'
 Vue.use(Router)
 
 export default new Router({
@@ -37,9 +40,24 @@ export default new Router({
       component: Index
     },
     {
-      path:'/Register',
+      path: '/user/Login',
+      name:'userLogin',
+      component:UserLogin
+    },
+    {
+      path:'/user/Register',
       name:'Register',
       component:Register
+    },
+    {
+      path:"/user/Main",
+      name:'UserMain',
+      component:UserMain
+    },
+    {
+      path:"/user/buyCombo",
+      name:'userBuyCombo',
+      component:userBuyCombo
     },
     {
       path:'/Main',
