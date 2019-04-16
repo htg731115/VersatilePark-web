@@ -22,12 +22,17 @@
     <el-row>
       <el-col>
         <el-card>
+          <el-col :span="4" offset="8">
+          <el-input placeholder="请输入客户名称"/>
+          </el-col>
+          <el-col :span="4">
+          <el-button>查询</el-button></el-col>
           <el-table
              :data="customerData"
              height="500"
              border>
-             <el-table-column prop="c_id" label="用户ID" width="148"/>
-             <el-table-column prop="c_name" label="用户名称" width="180"/>
+             <el-table-column prop="c_id" label="客户ID" width="148"/>
+             <el-table-column prop="c_name" label="客户名称" width="180"/>
              <el-table-column prop="sex" label="性别" width="148">
                <template slot-scope="scope">
                   <el-tag v-if="scope.row.sex==1">男</el-tag>

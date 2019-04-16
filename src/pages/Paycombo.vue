@@ -10,9 +10,6 @@
             <el-tab-pane label="各项目自定义套餐">
                 <ComboList/>
             </el-tab-pane>
-            <el-tab-pane label="角色管理"><LogComboList/> </el-tab-pane>
-            
-            <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
             </el-tabs>
         </div>
         <el-card>

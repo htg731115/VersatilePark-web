@@ -32,7 +32,8 @@
                 </div>
             </el-card>
         </el-col>
-        <div class="log_relative">近期六次修改记录</div>
+        <el-col>
+        <div class="log_relative">近期六次修改记录</div></el-col>
     </el-row>
    <el-row style="margin-top: 2vw;">
        <el-button type="primary" plain @click="pushDefault()">写入默认套餐参数</el-button>

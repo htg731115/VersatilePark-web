@@ -9,7 +9,8 @@
         @click-right="onClickRight"
         />
     <div style="margin-top:20px">
-       <van-steps :active="active">
+       <van-steps :active="active"
+       active-icon="info-o">
         <van-step>输入手机号码</van-step>
         <van-step>输入账号密码</van-step>
         <van-step>个人详细资料</van-step>

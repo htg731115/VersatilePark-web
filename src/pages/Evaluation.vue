@@ -31,7 +31,11 @@
                     <el-tag  v-else-if="scope.row.degress==3" type="danger">差评</el-tag>
                     </template>
                 </el-table-column>
-                <el-table-column prop="handler_status" label="处理状态" />
+                <el-table-column  label="处理状态" >
+                    <template slot-scope="scope">
+                    <span class="el-icon-warning" style="color:red" >未处理</span>
+                    </template>
+                </el-table-column>
                 <el-table-column prop="create_time" label="评价时间" />
                 </el-table>
             </el-row>
