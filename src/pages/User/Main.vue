@@ -25,7 +25,7 @@
 
     <van-cell-group>
       <van-cell icon="points" title="购买套餐" is-link @click="buyCombo()" />
-      <van-cell icon="gold-coin-o" title="我的优惠券" is-link />
+      <van-cell icon="gold-coin-o" title="实名认证" is-link  @click="certification()"/>
       <van-cell icon="gift-o" title="我收到的礼物" is-link />
     </van-cell-group>
   </div>
@@ -54,6 +54,9 @@ export default {
     },
     buyCombo(){
       this.$router.push("/user/buyCombo")
+    },
+    certification(){
+      this.$router.push("/user/certification")
     }
   }
 };

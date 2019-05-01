@@ -24,6 +24,7 @@ import ManagerPayCombo from '@/pages/Manager/PayCombo'
 import UserLogin from '@/pages/User/Login'
 import UserMain from '@/pages/User/Main'
 import userBuyCombo from '@/pages/User/userBuyCombo'
+import certification from '@/pages/User/certification'
 Vue.use(Router)
 
 export default new Router({
@@ -58,6 +59,11 @@ export default new Router({
       path:"/user/buyCombo",
       name:'userBuyCombo',
       component:userBuyCombo
+    },
+    {
+      path:"/user/certification",
+      name:'certification',
+      component:certification
     },
     {
       path:'/Main',
