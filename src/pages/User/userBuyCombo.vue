@@ -13,7 +13,7 @@
     </van-row>
         <van-dialog
         v-model="show"
-        title="标题"
+        title="请选择停车场"
         show-cancel-button
         @cancel="onCancel"
         @confirm="onConfirm"

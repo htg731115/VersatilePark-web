@@ -19,14 +19,14 @@
         position="bottom"
       >
       <van-button @click="show = false" >取消</van-button>
-      <van-button type="danger" @click="loginOut()"> 退出登陸</van-button>
+      <van-button type="danger" @click="loginOut()"> 退出登录</van-button>
       </van-popup>
 
 
     <van-cell-group>
       <van-cell icon="points" title="购买套餐" is-link @click="buyCombo()" />
       <van-cell icon="gold-coin-o" title="实名认证" is-link  @click="certification()"/>
-      <van-cell icon="gift-o" title="我收到的礼物" is-link />
+      <van-cell icon="gift-o" title="评价停车场" is-link @click="evaluation()" />
     </van-cell-group>
   </div>
 </template>
@@ -53,10 +53,13 @@ export default {
       })
     },
     buyCombo(){
-      this.$router.push("/user/buyCombo")
+      this.$router.push("/user/buyCombo");
     },
     certification(){
-      this.$router.push("/user/certification")
+      this.$router.push("/user/certification");
+    },
+    evaluation(){
+      this.$router.push("/user/evaluation");
     }
   }
 };

@@ -25,6 +25,7 @@ import UserLogin from '@/pages/User/Login'
 import UserMain from '@/pages/User/Main'
 import userBuyCombo from '@/pages/User/userBuyCombo'
 import certification from '@/pages/User/certification'
+import UserEvaluation from '@/pages/User/Evaluation'
 Vue.use(Router)
 
 export default new Router({
@@ -54,6 +55,11 @@ export default new Router({
       path:"/user/Main",
       name:'UserMain',
       component:UserMain
+    },
+    {
+      path:"/user/evaluation",
+      name:'UserEvaluation',
+      component:UserEvaluation
     },
     {
       path:"/user/buyCombo",
