@@ -4,7 +4,8 @@
       <el-row>
         <el-col :span="8" :offset="1">
           <el-card>
-           <img src="../assets/timg.jpg" style="width:100%"/>
+            <img :src="message.imgSrc" style="width:100%" v-if="message.imgSrc">
+            <img v-else src="../assets/timg.jpg" style="width:100%"/>
           </el-card>
         </el-col>
         <el-col :span="15">

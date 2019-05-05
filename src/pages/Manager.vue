@@ -1,10 +1,12 @@
 <template>
   <div >
     <el-row>
+      <el-button style="margin-top:20px" @click="show()">新增管理员</el-button>
       <el-row>
         <el-col :span="5" v-for="(item,index) in Managerdata.slice(0,3)" :key="item.index" :offset=2 class="Manager">
           <el-card>
-            <img src="../assets/timg.jpg" style="width:100%"/>
+            <img :src="item.imgSrc" style="width:100%" v-if="item.imgSrc">
+            <img  v-else src="../assets/timg.jpg" style="width:100%"/>
               <el-row>{{item.name}}</el-row>
               <el-row>{{item.project}}</el-row>
               <el-row>
@@ -32,7 +34,8 @@
       <el-row>
         <el-col :span="5" v-for="(item,index) in Managerdata.slice(3)" :key="item.index" :offset=2 class="Manager">
           <el-card>
-            <img src="../assets/timg.jpg" style="width:100%"/>
+            <img :src="item.imgSrc" style="width:100%" v-if="item.imgSrc">
+            <img v-else src="../assets/timg.jpg" style="width:100%"/>
               <el-row>{{item.name}}</el-row>
               <el-row>{{item.project}}</el-row>
               <el-row>
@@ -58,6 +61,24 @@
         </el-col>
       </el-row>
     </el-row>
+
+<!-- dialog -->
+  <el-dialog title="新增管理员" :visible.sync="ShowDialog" width="30%" >
+    <el-row>
+      <el-col style="margin-bottom:20px"><el-col :span="4">账号</el-col><el-col :span="18"><el-input v-model="name" placeholder="" /></el-col></el-col>
+      <el-col style="margin-bottom:20px"><el-col :span="4">密码</el-col><el-col :span="18"><el-input v-model="password" type="password" placeholder="" /></el-col></el-col>
+      <el-col style="margin-bottom:20px"><el-col :span="4">姓名</el-col><el-col :span="18"><el-input v-model="userName" placeholder="" /></el-col></el-col>
+      <el-col style="margin-bottom:20px"><el-col :span="4">手机号码</el-col><el-col :span="18"><el-input v-model="phoneNum" placeholder="" /></el-col></el-col>
+      <el-col style="margin-bottom:20px"><el-col :span="4">身份证号码</el-col><el-col :span="18"><el-input v-model="idNum" placeholder="" /></el-col></el-col>
+      
+       <el-radio v-model="sex" label="1">男</el-radio>
+       <el-radio v-model="sex" label="2">女</el-radio>
+    </el-row>
+    <el-button type="primary" @click="submitForm()">提交</el-button>
+    <el-button @click="resetForm('ruleForm2')">重置</el-button>
+  </el-dialog>
+<!-- dialog -->
+
          <el-pagination
            @current-change="handleCurrentChange"
            :current-page.sync="pageNum"
@@ -79,7 +100,16 @@ export default{
       showPop4:[],
       select:'',
       totalPages:10,
-      pageNum:1
+      pageNum:1,
+      ShowDialog:false,
+
+      // 新增管理员
+      name:"",
+      password:"",
+      userName:"",
+      phoneNum:"",
+      idNum:"",
+      sex:"1",
     }
   },
   mounted(){
@@ -135,12 +165,45 @@ export default{
       })
     },
     Alter(managerid){
-      console.log("啊啊呜"+managerid)
+
       this.$axios.post("/api/alterproject",{
           admin_id:managerid,project:this.select
       }).then(res=>{
           
       })
+    },
+    submitForm(){
+      if(this.name==""||this.password==""||this.userName==""||this.phoneNum==""||this.idNum==""){
+        this.$message.error("所有项都为必填");
+        return;
+      }
+      let postData = this.$qs.stringify({
+        name:this.name,userName:this.userName,idNum:this.idNum,phoneNum:this.phoneNum,
+        password:this.$md5(this.password),sex:this.sex
+      })
+      this.$axios.post("/api/addManager",postData).then(res=>{
+        if(1==res.data){
+          this.$message.error("该用户名已经被注册")
+          
+        }
+        else{
+          this.$message.success("添加成功");
+          this.ShowDialog = false;
+           this.GetManager();
+        }
+      })
+    },
+    show(){
+      this.select="";
+      this.ShowDialog  = true;
+    },
+    resetForm(){
+      this.name="";
+      this.password="";
+      this.userName="";
+      this.phoneNum="";
+      this.idNum="";
+      this.sex="1";
     }
   }
 }
@@ -151,5 +214,7 @@ export default{
   margin-bottom: 40px;
   box-shadow: 0 0 30px #cac6c6;
 }
-
+.el-dialog__body{
+  line-height: 40px;
+}
 </style>
