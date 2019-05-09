@@ -16,26 +16,26 @@
               <i class="el-icon-tickets"></i>
               <span>个人信息</span>
             </template>
-              <el-menu-item index="/Manager/person" >修改个人详细信息</el-menu-item>
-              <el-menu-item index="/Manager/changepassword">修改密码</el-menu-item>
+              <el-menu-item index="/Manager/person" @click="active='/Manager/person'">修改个人详细信息</el-menu-item>
+              <el-menu-item index="/Manager/changepassword" @click="active='/Manager/changepassword'">修改密码</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-news"></i>
               <span>项目管理</span>
             </template>
-              <el-menu-item index="/Manager/project">停车场管理</el-menu-item>
-              <el-menu-item index="/Manager/evaluation">用户评价</el-menu-item>
-              <el-menu-item index="/Manager/paycombo">套餐管理</el-menu-item>
+              <el-menu-item index="/Manager/project" @click="active='/Manager/project'">停车场管理</el-menu-item>
+              <el-menu-item index="/Manager/evaluation" @click="active='/Manager/evaluation'">用户评价</el-menu-item>
+              <el-menu-item index="/Manager/paycombo" @click="active='/Manager/paycombo'" >套餐管理</el-menu-item>
           </el-submenu>
           <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-tickets"></i>
               <span>停车管理</span>
             </template>
-            <ElMenuItem index="/Manager/parkingrecord">停车记录</ElMenuItem>
-            <ElMenuItem index="/Manager/portrecord">闸口监控</ElMenuItem>
-            <ElMenuItem index="/Main/carflow">车量负载率统计</ElMenuItem>
+            <ElMenuItem index="/Manager/parkingrecord" @click="active='/Manager/parkingrecord'">停车记录</ElMenuItem>
+            <ElMenuItem index="/Manager/portrecord" @click="active='/Manager/portrecord'">闸口监控</ElMenuItem>
+            <ElMenuItem index="/Main/carflow" @click="active='/Manager/changepassword'">车量负载率统计</ElMenuItem>
           </el-submenu>
         </el-menu>
 </div>

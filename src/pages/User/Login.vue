@@ -43,13 +43,17 @@ export default {
                 this.$axios.post("/api/user-login",{
                     name:this.account,password:this.$md5(this.password)
                 }).then(res=>{
-                if("0" == res.data){
+                if("0" == res.data.code){
                     this.$toast.fail("该账号不存在");
-                }else if("1" == res.data){
+                }else if("1" == res.data.code){
                     this.$toast.fail("账号密码错误");
                 }else{
                     this.$toast.success("登录成功");
-                    this.$router.push('/user/Main');    
+                    var obj ={};
+                    obj.id=res.data.id;
+                    obj.userType = res.data.type;
+                    this.$store.commit('setLogin',obj);
+                    this.$router.push('/user/Main');
                 }
             })
            

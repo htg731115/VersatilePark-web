@@ -44,7 +44,8 @@ export default new Router({
     {
       path: '/user/Login',
       name:'userLogin',
-      component:UserLogin,      
+      component:UserLogin,
+            
     },
     {
       path:'/user/Register',
@@ -55,25 +56,33 @@ export default new Router({
       path:"/user/Main",
       name:'UserMain',
       component:UserMain,
-      requiresAuth2: true
+      meta:{
+        requiresAuth3: true
+      }
     },
     {
       path:"/user/evaluation",
       name:'UserEvaluation',
       component:UserEvaluation,
-      requiresAuth2: true
+      meta:{
+        requiresAuth3: true
+      }
     },
     {
       path:"/user/buyCombo",
       name:'userBuyCombo',
       component:userBuyCombo,
-      requiresAuth2: true
+      meta:{
+        requiresAuth3: true
+      }
     },
     {
       path:"/user/certification",
       name:'certification',
       component:certification,
-      requiresAuth2: true
+      meta:{
+        requiresAuth3: true
+      }
     },
     {
       path:'/Main',
@@ -107,7 +116,7 @@ export default new Router({
         {path:'/Manager/paycombo',name:'managerPayCombo',component:ManagerPayCombo},
       ],
       meta:{
-         requiresAuth: true
+         requiresAuth2: true
       }
     },
     {

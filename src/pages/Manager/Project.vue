@@ -24,7 +24,11 @@
                     项目面积:</el-col><el-col :span="5"><el-input size="small" v-model="projectData.area" v-if="changeFlag"/><span v-else> {{projectData.area}}平方米</span>
                 </el-col>
                 <el-col :span="3" :offset="3">
-                    运营状态：</el-col><el-col :span="5"><el-input size="small" v-model="projectData.state" v-if="changeFlag"/><span v-else>{{projectData.state}}</span>
+                    运营状态：</el-col><el-col :span="5"><span >
+                        <div><span v-if="projectData.state==1">已运营</span>
+                        <span v-else>未运营</span>
+                        </div>
+                        </span>
                 </el-col>
             </el-row>
             <el-row class = "item_Wapper">

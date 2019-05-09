@@ -65,14 +65,21 @@ export default {
             var id = response.data.id;
             var name = response.data.name;
             var projectId = response.data.projectId;
-            this.$store.commit('setLogin',id,userType);
-            this.$store.commit('setUserName',name);
-            this.$store.commit('setPorjectId',projectId);
-            console.log(this.$store);
-            if(userType ==0)
-              this.$router.push({path: 'Main/project'});
-            else if(userType ==1){
-              this.$router.push({path: 'Manager/person'});
+            if(null == userType){
+              this.Remessage = "登陆失败"
+            }
+            else{
+              var obj = {};
+              obj.id = id ; obj.userType = userType;
+              this.$store.commit('setLogin',obj);
+              this.$store.commit('setUserName',name);
+              this.$store.commit('setPorjectId',projectId);
+              debugger
+              if(userType ==0)
+                this.$router.push({path: 'Main/project'});
+              else if(userType ==1){
+                this.$router.push({path: 'Manager/person'});
+              }
             }
           }else
             this.Remessage="登录失败,密码错误"

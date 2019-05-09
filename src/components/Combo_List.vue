@@ -58,8 +58,8 @@
 
 
 
-        <div class="dialog_wapper">
-        <el-dialog title="修改套餐"  :visible.sync="dialogFormVisible" >
+        <div class="">
+        <el-dialog  title="修改套餐"  :visible.sync="dialogFormVisible" >
                 <el-form >
                     <el-form-item label="套餐名称" >
                     <el-input v-model="comboName"></el-input>
@@ -211,7 +211,7 @@ export default{
     margin: 10px;
 }
 .el-dialog{
-    width: 20%;
+    
     
 }
 </style>

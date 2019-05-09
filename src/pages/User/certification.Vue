@@ -61,7 +61,7 @@
       <div v-else>
          <van-row style="margin-top:20px">
             <van-col span="16" offset="8"><van-field :value="text" error disabled/> </van-col>
-                  <van-panel  style="margin-top:30px" title="实名认证信息" :status="statusText">
+                  <van-panel  style="margin-top:30px" title="实名认证信息" status="已认证">
               <div>
                 <van-row style="margin-top:10px">
                   身份证号码

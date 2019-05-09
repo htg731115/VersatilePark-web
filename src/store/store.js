@@ -27,20 +27,17 @@ const store = new Vuex.Store({
     loginOut2(){
       sessionStorage.removeItem("customerId");
     },
-    setLogin(state,userId,userType){
-      state.userId = userId;
-      sessionStorage.setItem("userId",userId);
-      state.userType = userType;
-      sessionStorage.setItem("userType",userType);
+    setLogin(state,obj){
+      state.userId = obj.id;
+      sessionStorage.setItem("userId",obj.id);
+      state.userType = obj.userType;
+      sessionStorage.setItem("userType",obj.userType);
+      debugger;
     },
     setPorjectId(state,projectId){
       state.projectId = projectId;
       sessionStorage.setItem("projectId",projectId);
     },
-    setCustomerId(state,customerId){
-      state.customerId = customerId;
-      sessionStorage.setItem("customerId",customerId);
-    }
   }
 })
 

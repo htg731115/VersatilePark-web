@@ -56,7 +56,7 @@
                label="操作"
                width="120">
                <template slot-scope="scope">
-                <el-button type="primary" icon="el-icon-edit" v-on:click="AlterProject(scope.row.id)">编辑</el-button>
+                <el-button type="primary" icon="el-icon-edit" v-on:click="AlterProject(scope.row)">编辑</el-button>
                </template>
              </el-table-column>
            </el-table>
@@ -81,7 +81,7 @@
       </el-col>
     </el-row>
      <!-- 项目添加弹窗 -->
-
+    <div>
      <el-dialog title="添加项目" :visible.sync="ShowDialog" :v-if="ShowDialog==false" >
        <el-form :model="addproform" ref="addproform" label-width="70px" >
          <el-form-item label="项目名称"  prop="name">
@@ -110,7 +110,36 @@
        </el-form-item>
        </el-form>
      </el-dialog>
+     </div>
 <!--- -->
+
+    <!-- 修改项目 -->
+   <el-dialog title="添加项目" :visible.sync="ShowDialog2" :v-if="ShowDialog==false" >
+       <el-form :model="alterproform" ref="alterproform" label-width="70px" >
+         <el-form-item label="项目名称"  prop="name">
+           <el-input autocomplete="off"  v-model="alterproform.name" ></el-input>
+         </el-form-item>
+         <el-form-item label="项目地址" prop="address">
+           <el-input v-model="alterproform.address"></el-input>
+         </el-form-item>
+         <el-row>
+           <el-col :span="8">
+         <el-form-item label="车位数" prop="total_num">
+           <el-input type="number" v-model="alterproform.total_num"></el-input>
+         </el-form-item></el-col>
+        
+           <el-col :span="4" :offset=1>
+         <el-form-item label="运营状态" prop="state">
+           <el-switch v-model="alterproform.state" ></el-switch>
+         </el-form-item></el-col>
+          </el-row>
+         <el-form-item>
+         <el-button v-on:click="ShowDialog2=false">取 消</el-button>
+         <el-button type="primary" v-on:click="commitAlterProject()">确 定</el-button>
+       </el-form-item>
+       </el-form>
+     </el-dialog>
+    <!-- 修改项目 -->
 
   </div>
 </template>
@@ -131,18 +160,26 @@ export default {
           total_num:'',
           managerid:'',
       },
+        alterproform:{
+          name:'',
+          address:'',
+          opentime:'',
+          state:'',
+          total_num:'',
+          admin_id:'',
+      },
       pageNum:1,
       pageSize:10,
       totalPages:10,
       SContent:'',
       selectItem:[],
       ShowDialog:false,
+      ShowDialog2:false,
     }
   },
   mounted(){
     this.GetProject();
     this.GetManager();
-    console.log(this.ShowDialog);
   },
   methods:{
     GetProject :function () {
@@ -173,8 +210,24 @@ export default {
       console.log(this.addproform.name)
       this.ShowDialog=false
     },
-    AlterProject:function(id){
-      console.log(id)
+    AlterProject:function(project){
+      let temp = project ; 
+      this.ShowDialog2 = true;
+      this.alterproform = temp;
+      if(this.alterproform.state==1)
+      {
+        this.alterproform.state =true;
+      }
+    },
+    commitAlterProject(){
+      let postData = this.$qs.stringify({
+        projectId:this.alterproform.id,name:this.alterproform.name,address:this.alterproform.address,total_num:this.alterproform.total_num,state:this.alterproform.state,
+        area:24
+      })
+      debugger
+      this.$axios.post("api/commit-alter-project",postData).then(res=>{
+        this.$message.success("修改成功");
+      })
     },
     ResetForm:function(formName) {
       this.ShowDialog=false

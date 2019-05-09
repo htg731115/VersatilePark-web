@@ -23,7 +23,7 @@
       <el-col>
         <el-card>
           <el-col :span="4" offset="8">
-          <el-input placeholder="请输入客户名称"/>
+          <el-input v-model="customerName" placeholder="请输入客户名称"/>
           </el-col>
           <el-col :span="4">
           <el-button>查询</el-button></el-col>
@@ -76,6 +76,7 @@ export default{
       totalPages:0,
       certNum:0,
       showCert:false,
+      customerName:"",
     }
   },
   mounted(){

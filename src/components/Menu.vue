@@ -16,26 +16,26 @@
               <i class="el-icon-tickets"></i>
               <span>停车场项目</span>
             </template>
-              <el-menu-item index="/Main/project" >项目列表</el-menu-item>
-              <el-menu-item index="/Main/manager">管理员</el-menu-item>
+              <el-menu-item index="/Main/project" @click="active='/Main/project'">项目列表</el-menu-item>
+              <el-menu-item index="/Main/manager" @click="active='/Main/manager'">管理员</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-news"></i>
               <span>运营管理</span>
             </template>
-              <el-menu-item index="/Main/customer">用户管理</el-menu-item>
-              <el-menu-item index="/Main/evaluation">用户评价</el-menu-item>
-              <el-menu-item index="/Main/paycombo">套餐管理</el-menu-item>
+              <el-menu-item index="/Main/customer" @click="active='/Main/customer'">用户管理</el-menu-item>
+              <el-menu-item index="/Main/evaluation" @click="active='/Main/evaluation'">用户评价</el-menu-item>
+              <el-menu-item index="/Main/paycombo" @click="active='/Main/paycombo'">套餐管理</el-menu-item>
           </el-submenu>
           <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-tickets"></i>
               <span>停车管理</span>
             </template>
-            <ElMenuItem index="/Main/parkingrecord">停车记录</ElMenuItem>
-            <ElMenuItem index="/Main/portrecord">闸口监控</ElMenuItem>
-            <ElMenuItem index="/Main/carflow">车量负载率统计</ElMenuItem>
+            <ElMenuItem index="/Main/parkingrecord" @click="active='/Main/parkingrecord'">停车记录</ElMenuItem>
+            <ElMenuItem index="/Main/portrecord" @click="active='/Main/portrecord'">闸口监控</ElMenuItem>
+            <ElMenuItem index="/Main/carflow" @click="active='/Main/carflow'">车量负载率统计</ElMenuItem>
           </el-submenu>
         </el-menu>
 </div>

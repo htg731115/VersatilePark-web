@@ -26,8 +26,9 @@ Vue.prototype.$qs = qs;
 axios.defaults.baseURL = 'http://localhost:8080/'; //配置接口地址
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)){
-    if(store.state.userId){
+  if (to.matched.some(record => record.meta.requiresAuth)){//管理员拦截
+    if(store.state.userType==0){
+      
       next();
     }
     else{
@@ -37,7 +38,29 @@ router.beforeEach((to, from, next) => {
       })
     }
   }
-  
+  if (to.matched.some(record => record.meta.requiresAuth2)){//项目管理员拦截
+    if(store.state.userType==1){
+      next();
+    }
+    else{
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}
+      })
+    }
+  }
+  if (to.matched.some(record => record.meta.requiresAuth3)){//客户拦截
+    console.log(store.state);
+    if(store.state.userType==2){
+      next();
+    }
+    else{
+      next({
+        path: '/user/login',
+        query: {redirect: to.fullPath}
+      })
+    }
+  }
   else{
     next()
   }
