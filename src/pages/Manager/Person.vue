@@ -71,6 +71,7 @@ export default {
           this.changeFlag =false;
       },
       editManagerInfo(){
+          console.log(this.$store.state);
           this.$axios.post('/api/edit-manager-info',{
               id:this.$store.state.userId,
               id_Num:this.dataList.id_Num,

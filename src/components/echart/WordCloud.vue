@@ -112,7 +112,7 @@ export default {
         getSomeContent(projectId){
             this.$axios.get("/api/get-some-content",{
                 params:{
-                    projectId:1,
+                    projectId:this.$store.state.projectId,
                 }
             }).then(res=>{
                 console.log(res);

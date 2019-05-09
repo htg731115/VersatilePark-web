@@ -50,7 +50,14 @@ export default {
         },
         loginOut(){
             this.$store.commit('loginOut');
-            this.username=this.$store.state.userName;
+            this.$axios.post("api/loginOut").then(res=>{
+                this.$message.success("退出成功");
+                
+                 console.log("caibi");
+                 console.log(this.$store.state);
+                this.$router.push({path: '/login'});
+            })
+        
         }        
     }
 }

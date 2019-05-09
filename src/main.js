@@ -27,13 +27,17 @@ axios.defaults.baseURL = 'http://localhost:8080/'; //配置接口地址
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)){
-    if(store.state.isLogin)
-      next()
+    if(store.state.userId){
+      next();
+    }
     else{
-      console.log("1");
-      next()
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}
+      })
     }
   }
+  
   else{
     next()
   }

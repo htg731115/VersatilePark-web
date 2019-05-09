@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     userId: sessionStorage.getItem('userId'),
     userType:sessionStorage.getItem("userType"),
     projectId:sessionStorage.getItem("projectId"),
+
     server:'http://localhost:8090/'
   },
   mutations: {
@@ -16,8 +17,15 @@ const store = new Vuex.Store({
       state.userName = userName;
       sessionStorage.setItem("userName",userName)
     },
-    loginOut (state) {
-      state.userName="";
+    loginOut () {
+      sessionStorage.removeItem("userName");
+      sessionStorage.removeItem("userId");
+      sessionStorage.removeItem("userType");
+      sessionStorage.removeItem("projectId");
+      console.log(sessionStorage);
+    },
+    loginOut2(){
+      sessionStorage.removeItem("customerId");
     },
     setLogin(state,userId,userType){
       state.userId = userId;
@@ -28,6 +36,10 @@ const store = new Vuex.Store({
     setPorjectId(state,projectId){
       state.projectId = projectId;
       sessionStorage.setItem("projectId",projectId);
+    },
+    setCustomerId(state,customerId){
+      state.customerId = customerId;
+      sessionStorage.setItem("customerId",customerId);
     }
   }
 })

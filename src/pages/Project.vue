@@ -166,11 +166,12 @@ export default {
     },
     AddProject :function(){
        this.$axios.post('api/addproject',{
-         name:this.addproform.name,address:this.addproform.address,opentime:"2018-02-03",state:"1",total_num:this.addproform.total_num,
+         name:this.addproform.name,address:this.addproform.address,state:"1",total_num:this.addproform.total_num,
        }).then(response=>{
+         this.$message.success("新增停车项目成功");
        })
       console.log(this.addproform.name)
-      ShowDialog=false
+      this.ShowDialog=false
     },
     AlterProject:function(id){
       console.log(id)

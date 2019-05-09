@@ -5,12 +5,12 @@
             </el-col><el-col :span="5"><el-button @click="dialogFormVisible = true">强制开闸</el-button></el-col>
         </el-row>
         <el-row>
-            <el-col :span="10" >
+            <el-col :span="9" >
                 <el-card >
                     <img src="../../assets/timg.jpg" style="width:100%"/>
                 </el-card>
             </el-col>
-            <el-col :span="5">
+            <el-col :span="5" :offset="1" >
                   <el-timeline style="margin-top: 33%;">
                     <el-timeline-item
                     v-for="(activity, index) in activities2"

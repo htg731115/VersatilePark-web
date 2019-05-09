@@ -16,13 +16,6 @@
         <el-row >
           <el-col ><el-button class="submit" type="primary" v-on:click="submit(LoginForm)" :loading="loading"> 登录</el-button></el-col>
         </el-row>
-        <el-row  class="bottomLink">
-          <el-col :span="8" :offset="5" >
-            <router-link to="/Forget">忘记密码</router-link></el-col>
-          <el-col  :span="2" :offset="1" >|</el-col>
-          <el-col  :span="4" :offset="1" >
-                <router-link to="/Register"> 注册</router-link></el-col>
-        </el-row>
       </el-form-item>
     </el-form>
   </div>
@@ -72,7 +65,6 @@ export default {
             var id = response.data.id;
             var name = response.data.name;
             var projectId = response.data.projectId;
-            debugger;
             this.$store.commit('setLogin',id,userType);
             this.$store.commit('setUserName',name);
             this.$store.commit('setPorjectId',projectId);
@@ -81,7 +73,6 @@ export default {
               this.$router.push({path: 'Main/project'});
             else if(userType ==1){
               this.$router.push({path: 'Manager/person'});
-
             }
           }else
             this.Remessage="登录失败,密码错误"

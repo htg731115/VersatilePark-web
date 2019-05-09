@@ -44,7 +44,7 @@ export default new Router({
     {
       path: '/user/Login',
       name:'userLogin',
-      component:UserLogin
+      component:UserLogin,      
     },
     {
       path:'/user/Register',
@@ -54,22 +54,26 @@ export default new Router({
     {
       path:"/user/Main",
       name:'UserMain',
-      component:UserMain
+      component:UserMain,
+      requiresAuth2: true
     },
     {
       path:"/user/evaluation",
       name:'UserEvaluation',
-      component:UserEvaluation
+      component:UserEvaluation,
+      requiresAuth2: true
     },
     {
       path:"/user/buyCombo",
       name:'userBuyCombo',
-      component:userBuyCombo
+      component:userBuyCombo,
+      requiresAuth2: true
     },
     {
       path:"/user/certification",
       name:'certification',
-      component:certification
+      component:certification,
+      requiresAuth2: true
     },
     {
       path:'/Main',

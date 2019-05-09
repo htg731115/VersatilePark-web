@@ -39,10 +39,20 @@ export default {
         this.$router.push('/user/Register');
         },
         login(){
-            this.$axios.post("/api/user-login").then(res=>{
-            
+                
+                this.$axios.post("/api/user-login",{
+                    name:this.account,password:this.$md5(this.password)
+                }).then(res=>{
+                if("0" == res.data){
+                    this.$toast.fail("该账号不存在");
+                }else if("1" == res.data){
+                    this.$toast.fail("账号密码错误");
+                }else{
+                    this.$toast.success("登录成功");
+                    this.$router.push('/user/Main');    
+                }
             })
-           this.$router.push('/user/Main')
+           
         }
     }
 }
