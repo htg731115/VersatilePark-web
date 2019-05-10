@@ -255,6 +255,7 @@ export default {
          }
          this.Projectdata.length=0
          this.Projectdata.push(tableItem);
+         this.totalPages=10
     })
   }//else de
   }}

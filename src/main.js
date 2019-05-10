@@ -28,7 +28,6 @@ axios.defaults.baseURL = 'http://localhost:8080/'; //配置接口地址
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)){//管理员拦截
     if(store.state.userType==0){
-      
       next();
     }
     else{

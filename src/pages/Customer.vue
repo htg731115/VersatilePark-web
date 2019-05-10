@@ -22,11 +22,11 @@
     <el-row>
       <el-col>
         <el-card>
-          <el-col :span="4" offset="8">
+          <el-col :span="4" :offset="8">
           <el-input v-model="customerName" placeholder="请输入客户名称"/>
           </el-col>
           <el-col :span="4">
-          <el-button>查询</el-button></el-col>
+          <el-button @click="search()">查询</el-button></el-col>
           <el-table
              :data="customerData"
              height="500"
@@ -48,7 +48,7 @@
                label="操作"
                width="120">
                <template slot-scope="scope">
-                <el-button v-if="check(scope.row.c_id)" type="primary" icon="el-icon-edit" v-on:click="AlterProject(scope.row.id)">编辑</el-button>
+                <el-button v-if="check(scope.row.c_id)" type="primary" icon="el-icon-edit" v-on:click="AlterCustomer(scope.row)">编辑</el-button>
                </template>
              </el-table-column>
            </el-table>
@@ -64,6 +64,24 @@
            :total="totalPages">
          </el-pagination></el-col>
      </el-row>
+
+<!-- dialog -->
+  <el-dialog title="新增管理员" :visible.sync="ShowDialog" width="30%" >
+    <el-row>
+      <el-col style="margin-bottom:20px"><el-col :span="4">姓名</el-col><el-col :span="18"><el-input v-model="alterCustomerData.c_name" placeholder=""  :disabled="true"/></el-col></el-col>
+      <el-col style="margin-bottom:20px"><el-col :span="4">手机号码</el-col><el-col :span="18"><el-input v-model="alterCustomerData.c_phone"  placeholder="" /></el-col></el-col>
+      <el-col style="margin-bottom:20px"><el-col :span="4">签约车牌号</el-col><el-col :span="18"><el-input v-model="alterCustomerData.plate_num" placeholder="" /></el-col></el-col>
+      <el-col style="margin-bottom:20px"><el-col :span="4">身份证号码</el-col><el-col :span="18"><el-input v-model="alterCustomerData.idnumber" placeholder="" /></el-col></el-col>
+      <el-col >
+       <el-radio v-model="alterCustomerData.sex" :label="1">男</el-radio>
+       <el-radio v-model="alterCustomerData.sex" :label="2">女</el-radio>
+      </el-col>
+    </el-row>
+    <el-button type="primary" @click="submit()">提交</el-button>
+    <el-button @click="ShowDialog=false">关闭</el-button>
+  </el-dialog>
+<!-- dialog -->
+
   </div>
 </template>
 <script>
@@ -77,6 +95,16 @@ export default{
       certNum:0,
       showCert:false,
       customerName:"",
+      ShowDialog:false,
+      alterCustomerData:[{
+        c_id:'',
+        c_name:'',
+        c_phone:'',
+        plate_num:1,
+        sex:null,
+        idnumber:'',
+
+      }],
     }
   },
   mounted(){
@@ -104,7 +132,6 @@ export default{
       }).then(res=>{
         this.customerData=res.data.list;
         this.totalPages=res.data.pages*10;
-        console.log(res);
       })
     },
     GetTotal(){
@@ -133,6 +160,35 @@ export default{
       let a=["1"]
       console.log(a.includes("1"))
       return a.includes("1");
+    },
+    AlterCustomer(customer){
+      this.ShowDialog = true;
+      let customerData = customer;
+      this.alterCustomerData = customerData;
+      console.log(customerData)
+    },
+    submit(){
+      let postData = {
+        customerId:this.alterCustomerData.c_id,
+        phone:this.alterCustomerData.c_phone,
+        plateNum:this.alterCustomerData.plate_num,
+        sex:this.alterCustomerData.sex,
+      }
+      this.$axios.post("/api/alter-customer",postData).then(res=>{
+        this.$message.success("修改成功")
+      })
+    },
+    search(){
+      this.showCert = false;
+        this.$axios.get('/api/search-customer-name',{
+        params:{
+          pageNum:this.pageNum,
+          name:this.customerName        
+          } 
+      }).then(res=>{
+        this.customerData=res.data.list;
+        this.totalPages=res.data.pages*10;
+      })
     }
   }
 }

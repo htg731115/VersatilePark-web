@@ -8,7 +8,7 @@
                             <img src="../assets/logo.png" height="150px" style="width:88%; }"/>
                             <div style="padding: 14px;">
                                 <div class="bottom clearfix">
-                                <time class="time" style="border-bottom:2px dashed #ff0000">套餐：<span v-if="index.combo!=null">{{index.combo_name}}</span><span v-else>无 </span><p/></time>
+                                <time class="time" style="border-bottom:2px dashed #ff0000">套餐：<span v-if="index.combo_name!=null">{{index.combo_name}}</span><span v-else>无 </span><p/></time>
                                 <time class="time" >入场时间：{{index.in_time}}<p/></time>
                                 <time class="time" >出场时间：{{index.out_time}}<p/></time>
                                 <span class="time" >{{index.plate_number}}</span>
@@ -20,6 +20,7 @@
                     </div>
                     <div v-else> 暂无数据</div>
             </el-row>
+           
     </div>
 </template>
 <script>
@@ -28,6 +29,7 @@ export default {
    data(){
     return{
         parkingRecordList:[],
+
     }
    },
    methods:{
@@ -37,19 +39,22 @@ export default {
                     state:state,
                     pageNum:pageNum,
                 }}).then(res=>{
-                    this.parkingRecordList = res.data.list;
+                    this.parkingRecordList = res.data.list; 
+                    this.$emit('alterTotal', res.data.pages*10);
+                    console.log(this.parkingRecordList)
                 })
        },
        searchByTime(state,startDate,endDate,pageNum){
            this.$axios.get("/api/get-parkingRecord",{
                params:{
                    state:state,
-                   pageNum,pageNum,
+                   pageNum:pageNum,
                    start_Date: startDate,
                    end_Date:endDate
                }
            }).then(res=>{
                this.parkingRecordList = res.data.list;
+               this.$emit('alterTotal', res.data.pages*10);
            })
        }
      

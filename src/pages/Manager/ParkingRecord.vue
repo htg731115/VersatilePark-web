@@ -11,7 +11,7 @@
            <el-button @click="searchParkingRecord()">查询</el-button>
             </el-row>
             
-        <el-table :data="tableData">
+        <el-table :data="tableData" style="height:550px">
             <el-table-column prop="id" label="停车记录id"/>
             <el-table-column prop="plate_number" label="车牌号码"/>
             <el-table-column prop="in_time" label="入场时间"/>
@@ -22,7 +22,13 @@
                 </template>
             </el-table-column>
         </el-table>
-
+         <el-pagination
+            @current-change="searchParkingRecord"
+            :current-page.sync="pageNum"
+            background
+            layout="prev, pager, next, jumper"
+            :total="total">
+         </el-pagination>
          <!-- dialog -->
     <el-dialog title="新增停车记录" :visible.sync="ShowDialog" width="30%" :v-if="ShowDialog==false" >
     <el-row>
@@ -53,17 +59,20 @@
 <script>
 import searchPlateNumber from '../../components/Search/Search_PlateNumber.vue'
 import TimePicker from '../../components/Picker/Time_Picker.vue';
+import pagination from '../../components/Pagination.vue';
 export default {
-    components:{searchPlateNumber,TimePicker},
+    components:{searchPlateNumber,TimePicker,pagination},
     data(){
         return{
             tableData:[],
             pageNum:1,
+            total:10,
             ShowDialog:false,
             insertParkingRecordList:[{
                 plateNumber:'',
                 inTime:'',
             }],
+
             
         }
     },
@@ -80,6 +89,7 @@ export default {
             }).then(res=>{
                 
                 this.tableData = res.data.list;
+                this.total = res.data.pages*10;
             })
         },
         outExcel(){
@@ -107,7 +117,7 @@ export default {
         },
         searchParkingRecord(){
             var params={
-                    pageNum:1,
+                    pageNum:this.pageNum,
                     plateNumber:this.$refs.searchPlateNumber.plateNumber,
             };
             if(this.$refs.timePicker.time!=null)
@@ -121,6 +131,7 @@ export default {
             }).then(res=>{
                 console.log(res);
                 this.tableData = res.data.list;
+                this.total = res.data.pages*10
             })
         },
         addParkingRecord(){

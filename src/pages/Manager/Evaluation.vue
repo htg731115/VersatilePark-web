@@ -71,6 +71,9 @@
        </el-form-item>
        </el-form>
      </el-dialog>
+    <!-- dialog -->
+    <pagination ref="page"/>
+
     <el-row>
         <el-col :offset="4" :span="20">
         <wordCloud/>
@@ -81,8 +84,9 @@
 
 <script>
 import wordCloud from '../../components/echart/WordCloud.vue'
+import pagination from '../../components/Pagination.vue'
 export default {
-    components:{wordCloud},
+    components:{wordCloud,pagination},
     data(){
         return{
             evaluationDate:[],
@@ -105,6 +109,8 @@ export default {
                 }
             }).then(res=>{
                 this.evaluationDate=res.data.list;
+                this.$refs.page.total = res.data.pages*10;
+                console.log(res);
             })
         },
         handle(evaluationItem){

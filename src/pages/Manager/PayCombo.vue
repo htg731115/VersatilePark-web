@@ -11,7 +11,7 @@
                 <el-button type="primary" @click="showDialog2()">新增</el-button>
             </el-col>
         </el-row>
-        <el-table :data="payComboList">
+        <el-table :data="payComboList" style="height:650px">
           <ElTableColumn label="序号">
               <template slot-scope="scope">
                   {{scope.row.id+1}}
@@ -44,7 +44,7 @@
               </template>
           </ElTableColumn>
         </el-table>
-
+        
         <el-dialog title="修改套餐"  :visible.sync="dialogFormVisible" >
                     <el-form >
                         <el-form-item label="套餐名称" >
@@ -77,13 +77,21 @@
                     <el-button v-else type="primary" @click="addPayCombo()">确定</el-button>
                 </div>
         </el-dialog>
+          <el-pagination
+            @current-change="search"
+            :current-page.sync="pageNum"
+            background
+            layout="prev, pager, next, jumper"
+            :total="total">
+         </el-pagination>
     </div>
 </template>
 
 <script>
 import searchComboName from '../../components/Search/Search_ComboName.vue'
+import pagination from '../../components/Pagination.vue'
 export default {
-    components:{searchComboName},
+    components:{searchComboName,pagination},
     data(){
         return{
             payComboName:'',
@@ -96,7 +104,9 @@ export default {
             end_time:'',
             temp:[],
             combo_id:'',
-            addFlag: false,            
+            addFlag: false,
+            pageNum:1,
+            total:10       
         }
     },
     mounted(){
@@ -106,10 +116,11 @@ export default {
         init(){
             this.$axios.get("/api/manager-get-payCombo",{
                 params:{
-                    pageNum:1,
+                    pageNum:this.pageNum,
                 }
             }).then(res=>{
                 this.payComboList = res.data.list;
+                this.total = res.data.pages*10;
             })
         },
         sell(payCombo){
@@ -174,11 +185,12 @@ export default {
         search(){
             this.$axios.get("/api/manager-search-payCombo",{
                 params:{
-                    pageNum:1,
+                    pageNum:this.pageNum,
                     comboName:this.$refs.searchComboName.comboName
                 }
             }).then(res=>{
                 this.payComboList = res.data.list;
+                this.total = res.data.pages*10;
             })
         },
         addPayCombo(){
@@ -204,5 +216,4 @@ export default {
 </script>
 
 <style>
-
 </style>

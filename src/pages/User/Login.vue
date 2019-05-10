@@ -10,7 +10,8 @@
         placeholder="请输入账号"
     ></van-field>
       <van-field
-        v-model="password"
+        v-model="password"   
+        type="password"
         center
         clearable
         label="密码"
